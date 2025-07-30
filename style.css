@@ -217,6 +217,8 @@ footer {
         width: 100%;
         margin-top: 1rem;
         z-index: 9999;
+        align-items: center; /* centers items horizontally */
+        text-align: center;
     }
 
     .nav-links li {
