@@ -19,9 +19,14 @@
                     <li><a href="#services">Services</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
-            </nav>
-        </div>
-    </header>
+      <div class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </nav>
+  </div>
+</header>
 
     <section class="hero">
         <!-- Background Video -->
@@ -82,6 +87,13 @@
     <!-- Footer -->
     <footer>
         <p>&copy; 2025 Brandwood Agriculture Services, LLC. All rights reserved.</p>
-    </footer>
+    </footer><script>
+  const hamburger = document.getElementById('hamburger');
+  const navLinks = document.getElementById('nav-links');
+
+  hamburger.addEventListener('click', () => {
+    navLinks.classList.toggle('active');
+  });
+</script> 
 </body>
 </html>
