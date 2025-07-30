@@ -210,6 +210,14 @@ footer {
         align-items: flex-start;
     }
 
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        margin-top: 1rem;
+        z-index: 9999;
+    }
+
     .nav-links li {
         margin: 0.5rem 0;
     }
@@ -269,8 +277,8 @@ footer {
     display: flex;
     margin-left: auto;
   }
-
-      .nav-links {
+    
+  .nav-links {
     display: none;
     flex-direction: column;
     background-color: #333;
@@ -279,8 +287,7 @@ footer {
     transition: all 0.3s ease-in-out;
     right: 0;
     width: 100%;
-    z-index: 9999;
-    }
+  }
 
   .nav-links.active {
     display: flex;
