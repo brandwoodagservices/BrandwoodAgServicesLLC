@@ -207,11 +207,12 @@ footer {
 /* Mobile Styles */
 @media (max-width: 768px) {
     header .container {
-        flex-direction: column;
+        flex-direction: row;
         align-items: flex-start;
     }
 
     .nav-links {
+        display: none;
         flex-direction: column;
         width: 100%;
         margin-top: 1rem;
@@ -275,8 +276,7 @@ footer {
     display: flex;
     margin-left: auto;
   }
-
-    @media (max-width: 768px) {
+    
   .nav-links {
     display: none;
     flex-direction: column;
