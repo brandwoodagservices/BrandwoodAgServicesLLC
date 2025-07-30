@@ -226,6 +226,7 @@ footer {
     .hero {
         height: auto;
         padding: 3rem 1rem;
+        z-index: 1;
     }
 
     .hero-content h2 {
