@@ -208,6 +208,7 @@ footer {
     header .container {
         flex-direction: row;
         align-items: flex-start;
+        position: relative;
     }
 
     .nav-links {
