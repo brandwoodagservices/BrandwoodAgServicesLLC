@@ -219,6 +219,7 @@ footer {
         z-index: 9999;
         align-items: center; /* centers items horizontally */
         text-align: center;
+        border-radius: 0 0 12px 12px;
     }
 
     .nav-links li {
