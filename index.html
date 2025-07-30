@@ -86,14 +86,17 @@
 
     <!-- Footer -->
     <footer>
-        <p>&copy; 2025 Brandwood Agriculture Services, LLC. All rights reserved.</p>
-    </footer><script>
-  const hamburger = document.getElementById('hamburger');
-  const navLinks = document.getElementById('nav-links');
+        <p>&copy; 2025 Brandwood Agriculture Services, LLC.</p>
+    </footer>
+    <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('nav-links');
 
-  hamburger.addEventListener('click', () => {
-    navLinks.classList.toggle('active');
+    hamburger.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+    });
   });
-</script> 
+</script>
 </body>
 </html>
