@@ -210,12 +210,16 @@ footer {
         align-items: flex-start;
     }
 
-    .nav-links {
-        display: none;
-        flex-direction: column;
-        width: 100%;
-        margin-top: 1rem;
-        z-index: 9999;
+      .nav-links {
+    display: none;
+    flex-direction: column;
+    background-color: #333;
+    position: absolute;
+    top: 100%;
+    transition: all 0.3s ease-in-out;
+    right: 0;
+    width: 100%;
+    z-index: 9999;
     }
 
     .nav-links li {
@@ -276,17 +280,6 @@ footer {
   .hamburger {
     display: flex;
     margin-left: auto;
-  }
-    
-  .nav-links {
-    display: none;
-    flex-direction: column;
-    background-color: #333;
-    position: absolute;
-    top: 100%;
-    transition: all 0.3s ease-in-out;
-    right: 0;
-    width: 100%;
   }
 
   .nav-links.active {
