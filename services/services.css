@@ -149,31 +149,6 @@ header .container {
     background: #FFFFFF;
 }
 
-.service-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
-    margin-top: 2rem;
-}
-
-.service-box {
-    background: #FFFFFF;
-    color: #2B2B2B;
-    padding: 2rem;
-    border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-}
-
-.service-box:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-}
-
-.service-box h3 {
-    margin-bottom: 1rem;
-    font-family: 'Merriweather', serif;
-}
-
 .btn-contact {
     display: inline-block;
     background-color: #2B2B2B; /* Charcoal */
