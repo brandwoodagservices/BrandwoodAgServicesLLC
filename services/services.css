@@ -288,6 +288,22 @@ footer {
   line-height: 1.5;
 }
 
+.founder-message {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 20px;
+}
+
+.founder-photo {
+  max-width: 200px;
+  border-radius: 10px;
+}
+
+.founder-text {
+  flex: 1;
+}
+
 /* MOBILE RESPONSIVENESS */
 @media (max-width: 768px) {
     header .container {
