@@ -67,37 +67,36 @@
     </div>
 </section>
 
+<section id="contact" class="section">
+  <div class="container">
+    <h2>Ready to Start Your Next Project?</h2>
+    <p>Get in touch today to discuss your vision — we’re here to bring your project to life with reliable, local expertise.</p>
 
-  <section id="about" class="section">
-    <div class="container">
-      <h2>Where Local Farming Meets Lasting Support.</h2>
-      <p>
-        Brandwood Ag Services is a locally owned company proudly based in Gilroy, California. What began as a small operation driven by a passion for agriculture has grown into a trusted partner for farms across the region. We specialize in solutions that support soil health, increase yields, and help family farms thrive for generations. Our team understands the land because we live on it — and we’re here to serve those who do the same.
-    </p>
-    </div>
-  </section>
+    <form class="contact-form" action="mailto:youremail@example.com" method="POST" enctype="text/plain">
+      <div class="form-group">
+        <label for="name">Full Name</label>
+        <input type="text" id="name" name="name" required />
+      </div>
 
-  <!-- Executive Team Section -->
-  <section id="team" class="section bg-light">
-      <div class="container">
-          <h2>Meet Our Executive Team</h2>
-          <div class="team-grid">
-              <div class="team-member">
-                  <img src="../images/blankphoto.jpg" alt="John Doe Headshot">
-                  <h3>Zach Griffin</h3>
-                  <p>Founder & CEO</p>
-              </div>
-  </section>
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="email" required />
+      </div>
 
+      <div class="form-group">
+        <label for="phone">Phone Number</label>
+        <input type="tel" id="phone" name="phone" />
+      </div>
 
-    <!-- Contact Section -->
-    <section id="contact" class="section">
-        <div class="container">
-            <h2>Want to join our team at Brandwood Ag?</h2>
-            <p>Fill Out Our Contact Form & Email Your Resume to contact@brandwoodagservices.com</p>
-            <a href="mailto:info@brandwoodag.com" class="btn-contact">Contact Form</a>
-        </div>
-    </section>
+      <div class="form-group">
+        <label for="message">Your Message</label>
+        <textarea id="message" name="message" rows="5" required></textarea>
+      </div>
+
+      <button type="submit" class="btn">Send Message</button>
+    </form>
+  </div>
+</section>
 
     <!-- Footer -->
     <footer>
