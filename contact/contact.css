@@ -358,13 +358,6 @@ footer {
         max-width: 150px;
     }
 
-    .logo-img {
-  max-width: 250px;   /* adjust size */
-  height: auto;
-  display: block;
-  margin: 0 auto;     /* centers logo inside container */
-}
-
     .btn-primary,
     .btn-contact {
         width: 100%;
