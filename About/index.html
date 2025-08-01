@@ -20,7 +20,7 @@
 />
 
   <!-- Favicon -->
-  <link rel="icon" href="images/Photoroom_20250729_073526.PNG" type="image/png" />
+  <link rel="icon" href="../images/Photoroom_20250729_073526.PNG" type="image/png" />
 </head>
 <body>
 <!-- Navbar -->
@@ -30,9 +30,9 @@
     
 <nav>
   <ul class="nav-links" id="nav-links">
-    <li><a href="About/">About</a></li>
-    <li><a href="services/">Services</a></li>
-    <li><a href="contact/">Contact</a></li>
+    <li><a href="../About">About</a></li>
+    <li><a href="../services">Services</a></li>
+    <li><a href="../contact">Contact</a></li>
     <li>
       <a
         href="https://www.instagram.com/brandwoodagservices"
@@ -103,5 +103,15 @@
     <footer>
         <p>&copy; 2025 Brandwood Agriculture Services, LLC.</p>
     </footer>
+    <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('nav-links');
+
+    hamburger.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+    });
+  });
+</script>
 </body>
 </html>
