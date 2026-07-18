@@ -879,7 +879,7 @@ if(!reduceMotion) gsap.timeline()
     onUpdate:()=>{ pctEl.textContent = Math.round(progress.v)+'%'; }
   },'-=.4')
   .to('.loader-bar',{scaleX:1,duration:1.8,ease:'power2.inOut'},'<')
-  .to('.loader-word span',{y:'-110%',duration:.6,stagger:.03,ease:'power3.in'},'+=.15')
+  .to('.loader-word span',{y:'-35%',opacity:0,duration:.55,stagger:.03,ease:'power2.in'},'+=.15')
   .to(['.loader-sub','.loader-track','#loader .pct'],{opacity:0,duration:.3},'<')
   .to('#loader',{yPercent:-100,duration:.9,ease:'power4.inOut'})
   .set('#loader',{display:'none'})
