@@ -1,127 +1,1582 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Brandwood Agriculture Services, LLC</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brandwood Ag Services — Ranch, Ag & Hunting Property Management | Gilroy, CA</title>
+<meta name="description" content="Brandwood Ag Services provides ranch and agricultural property management, livestock fencing, hunting property services, and mobile welding & fabrication throughout California.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
 
-  <!-- Main CSS -->
-  <link rel="stylesheet" href="style.css" />
+  :root{
+    --cream:#F4F0E6;
+    --cream-2:#EAE4D4;
+    --ink:#171B14;
+    --ink-2:#20261C;
+    --green:#33502C;
+    --green-lt:#4C6B41;
+    --wheat:#D9A441;
+    --rust:#B75C2A;
+    --line:rgba(23,27,20,.14);
+    --line-lt:rgba(244,240,230,.16);
+    --font-d:'Bebas Neue', sans-serif;
+    --font-b:'Source Sans 3', sans-serif;
+    /* semantic tokens (ui-ux-pro-max: Agriculture — earth green + harvest gold) */
+    --color-primary:var(--green);
+    --color-on-primary:#FFFFFF;
+    --color-accent:var(--rust);
+    --color-background:var(--cream);
+    --color-foreground:var(--ink);
+    --color-ring:var(--rust);
+    --r-md:12px;  /* Organic Biophilic radii */
+    --r-lg:18px;
+    --r-xl:24px;
+  }
+  :focus-visible{outline:3px solid var(--color-ring);outline-offset:3px;border-radius:4px;}
+  .services :focus-visible,.cta :focus-visible{outline-color:var(--wheat);}
+  .skip-link{
+    position:fixed;top:.6rem;left:.6rem;z-index:200;background:var(--ink);color:var(--cream);
+    padding:.6rem 1rem;border-radius:999px;font-size:.8rem;font-weight:600;
+    transform:translateY(-300%);transition:transform .2s ease;
+  }
+  .skip-link:focus{transform:none;}
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:auto;}
+  body{
+    background:var(--cream);
+    color:var(--ink);
+    font-family:var(--font-b);
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+  ::selection{background:var(--wheat);color:var(--ink);}
+  h1,h2,h3,.display{font-family:var(--font-d);font-weight:400;line-height:.92;letter-spacing:.01em;}
+  img,svg{display:block;max-width:100%;}
+  a{color:inherit;text-decoration:none;}
 
-  <!-- Google Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Merriweather&display=swap" rel="stylesheet" />
+  /* ---------- grain overlay ---------- */
+  .grain{
+    position:fixed;inset:0;z-index:120;pointer-events:none;opacity:.05;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  }
 
-  <!-- Font Awesome for social icons -->
-<link
-  rel="stylesheet"
-  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-  crossorigin="anonymous"
-  referrerpolicy="no-referrer"
-/>
+  /* ---------- preloader ---------- */
+  #loader{
+    position:fixed;inset:0;z-index:100;background:var(--ink);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2.2rem;
+    color:var(--cream);
+  }
+  .loader-word{display:flex;overflow:hidden;}
+  .loader-word span{
+    font-family:var(--font-d);font-size:clamp(3rem,9vw,7rem);
+    line-height:1;display:inline-block;transform:translateY(110%);
+    color:var(--cream);white-space:pre;
+  }
+  .loader-word span.wheat{color:var(--wheat);}
+  .loader-sub{
+    overflow:hidden;font-size:.75rem;letter-spacing:.45em;text-transform:uppercase;
+    color:rgba(244,240,230,.55);
+  }
+  .loader-sub span{display:inline-block;transform:translateY(110%);}
+  .loader-track{
+    width:min(420px,70vw);height:1px;background:rgba(244,240,230,.18);position:relative;
+  }
+  .loader-bar{position:absolute;inset:0;background:var(--wheat);transform-origin:left;transform:scaleX(0);}
+  /* fence posts on the loader track */
+  .loader-track i{
+    position:absolute;top:-5px;width:2px;height:11px;background:rgba(244,240,230,.28);
+  }
+  #loader .pct{
+    font-family:var(--font-d);font-size:1.4rem;color:rgba(244,240,230,.6);letter-spacing:.1em;
+  }
 
-  <!-- Favicon -->
-  <link rel="icon" href="images/Photoroom_20250729_073526.PNG" type="image/png" />
+  /* ---------- nav (persistent frosted glass) ---------- */
+  nav{
+    position:fixed;top:0;left:0;right:0;z-index:80;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:1.1rem clamp(1.2rem,4vw,3rem);
+    background:rgba(23,27,20,.4);
+    backdrop-filter:blur(16px) saturate(160%);
+    -webkit-backdrop-filter:blur(16px) saturate(160%);
+    border-bottom:1px solid rgba(244,240,230,.1);
+    color:var(--cream);
+    transition:background .35s ease,box-shadow .35s ease;
+  }
+  nav.scrolled{
+    background:rgba(23,27,20,.72);
+    box-shadow:0 10px 30px rgba(0,0,0,.22);
+  }
+  nav .logo{font-family:var(--font-d);font-size:1.5rem;letter-spacing:.06em;display:flex;align-items:center;gap:.55rem;}
+  nav .logo .mark{width:30px;height:30px;}
+
+  /* ---------- logo mark (masked PNG, tinted via currentColor) ---------- */
+  .logo-mark{
+    display:inline-block;flex:none;background-color:currentColor;
+    -webkit-mask-image:url('images/BrandwoodAGLOGO.png');-webkit-mask-size:contain;
+    -webkit-mask-repeat:no-repeat;-webkit-mask-position:center;
+    mask-image:url('images/BrandwoodAGLOGO.png');mask-size:contain;
+    mask-repeat:no-repeat;mask-position:center;
+  }
+  .loader-logo{width:70px;height:70px;color:var(--cream);}
+  .foot-logo{width:15px;height:15px;color:currentColor;vertical-align:-2px;margin-right:.4em;}
+  .nav-links{display:flex;gap:2rem;align-items:center;font-size:.8rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;}
+  .nav-links a{position:relative;padding:.2rem 0;}
+  .nav-links a::after{
+    content:'';position:absolute;left:0;bottom:0;height:2px;width:100%;
+    background:var(--rust);transform:scaleX(0);transform-origin:right;transition:transform .35s cubic-bezier(.65,0,.35,1);
+  }
+  .nav-links a:hover::after{transform:scaleX(1);transform-origin:left;}
+
+  .nav-toggle{
+    display:none;flex-direction:column;justify-content:center;align-items:center;gap:5px;
+    width:38px;height:38px;background:none;border:none;cursor:pointer;padding:0;flex:none;
+    -webkit-tap-highlight-color:transparent;
+  }
+  .nav-toggle span{
+    display:block;width:22px;height:2px;background:var(--cream);border-radius:2px;
+    transition:transform .3s ease,opacity .3s ease;
+  }
+  .nav-toggle[aria-expanded="true"] span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+  .nav-toggle[aria-expanded="true"] span:nth-child(2){opacity:0;}
+  .nav-toggle[aria-expanded="true"] span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+
+  @media(max-width:760px){
+    .nav-toggle{display:flex;}
+    .nav-links{
+      position:fixed;top:0;left:0;right:0;z-index:79;
+      flex-direction:column;align-items:stretch;gap:0;
+      padding:5.5rem 1.5rem 2rem;
+      background:rgba(23,27,20,.97);
+      -webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);
+      transform:translateY(-100%);opacity:0;visibility:hidden;
+      transition:transform .35s cubic-bezier(.65,0,.35,1),opacity .3s ease,visibility 0s linear .35s;
+    }
+    .nav-links.open{
+      transform:translateY(0);opacity:1;visibility:visible;
+      transition:transform .35s cubic-bezier(.65,0,.35,1),opacity .3s ease,visibility 0s linear 0s;
+    }
+    .nav-links a{font-size:1.15rem;padding:1rem 0;border-bottom:1px solid rgba(244,240,230,.12);}
+    .nav-links a::after{display:none;}
+  }
+
+  /* ---------- hero ---------- */
+  .hero{
+    min-height:100svh;position:relative;display:flex;flex-direction:column;
+    justify-content:flex-end;overflow:hidden;
+    background:linear-gradient(180deg,var(--cream) 0%,var(--cream) 60%,var(--cream-2) 100%);
+  }
+  .hero::before{
+    content:'';position:absolute;inset:0;z-index:2;pointer-events:none;
+    background:radial-gradient(120% 85% at 50% 12%,transparent 55%,rgba(23,27,20,.09) 100%);
+  }
+  .hero-sky{position:absolute;inset:0;z-index:0;pointer-events:none;}
+  .sky-layer{position:absolute;inset:0;opacity:0;}
+  .sky-sunset{background:linear-gradient(180deg,#F3C878 0%,#E89A5C 32%,#D9744C 64%,#C15A42 100%);}
+  .sky-dusk{background:linear-gradient(180deg,#6B4A55 0%,#45384A 32%,#2A2A33 64%,var(--ink) 100%);}
+  .hero-inner{position:relative;z-index:3;padding:6rem clamp(1.2rem,4vw,3rem) 0;}
+  .hero-kicker{
+    display:flex;align-items:center;gap:.8rem;font-size:.78rem;font-weight:600;
+    letter-spacing:.35em;text-transform:uppercase;color:var(--green);margin-bottom:1.2rem;
+    opacity:0;
+  }
+  .hero-kicker::before{content:'';width:44px;height:2px;background:linear-gradient(90deg,var(--rust),var(--wheat));}
+  .hero h1{
+    font-size:clamp(4.2rem,14.5vw,13.5rem);
+    text-transform:uppercase;color:var(--ink);
+    text-shadow:0 8px 34px rgba(23,27,20,.10);
+  }
+  .hero h1 .line{display:block;overflow:hidden;}
+  .hero h1 .line > span{display:inline-block;transform:translateY(110%);}
+  .hero h1 em{
+    font-style:normal;
+    background:linear-gradient(180deg,var(--green-lt) 0%,var(--green) 62%,#20301A 100%);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .hero-meta{
+    display:flex;justify-content:space-between;align-items:flex-end;gap:2rem;
+    padding:1.6rem 0 2rem;max-width:100%;flex-wrap:wrap;opacity:0;
+  }
+  .hero-meta p{max-width:44ch;font-size:.95rem;line-height:1.65;color:rgba(23,27,20,.75);}
+  .hero-meta-actions{display:flex;flex-direction:column;align-items:flex-end;gap:1.3rem;}
+  .hero-btn{
+    display:inline-flex;align-items:center;gap:.7rem;background:var(--ink);color:var(--cream);
+    padding:.85rem 1.5rem;border-radius:999px;font-size:.78rem;font-weight:600;
+    letter-spacing:.12em;text-transform:uppercase;white-space:nowrap;
+    box-shadow:0 14px 30px rgba(23,27,20,.16);
+    transition:background .3s ease,transform .3s ease,box-shadow .3s ease;
+  }
+  .hero-btn svg{width:15px;transition:transform .3s ease;}
+  .hero-btn:hover{background:var(--rust);transform:translateY(-3px);box-shadow:0 16px 34px rgba(183,92,42,.32);}
+  .hero-btn:hover svg{transform:translateX(3px);}
+  .hero-scroll{
+    display:flex;align-items:center;gap:.7rem;font-size:.72rem;letter-spacing:.3em;
+    text-transform:uppercase;color:rgba(23,27,20,.66);white-space:nowrap;
+  }
+  .hero-scroll svg{width:14px;animation:bob 1.6s ease-in-out infinite;}
+  @keyframes bob{50%{transform:translateY(6px);}}
+  .hero-scape{position:relative;z-index:1;margin-top:-2vw;}
+  .hero-scape svg{width:100%;height:auto;}
+
+  /* ---------- marquee ---------- */
+  .marquee{
+    background:var(--ink);color:var(--cream);overflow:hidden;padding:1.05rem 0;
+    border-top:1px solid var(--ink);white-space:nowrap;
+  }
+  .marquee-track{display:inline-flex;gap:3rem;will-change:transform;}
+  .marquee-track span{
+    font-family:var(--font-d);font-size:1.5rem;letter-spacing:.12em;text-transform:uppercase;
+    display:inline-flex;align-items:center;gap:3rem;
+  }
+  .marquee-track b{color:var(--wheat);font-weight:400;}
+
+  /* ---------- intro / about ---------- */
+  .intro{padding:clamp(5rem,12vw,10rem) clamp(1.2rem,4vw,3rem);}
+  .sec-label{
+    font-size:.75rem;font-weight:600;letter-spacing:.4em;text-transform:uppercase;
+    color:var(--rust);display:flex;align-items:center;gap:.8rem;margin-bottom:2.2rem;
+  }
+  .sec-label::before{content:'';width:34px;height:2px;background:var(--rust);}
+  .intro-top{
+    display:grid;grid-template-columns:minmax(180px,240px) 1fr;
+    gap:clamp(2rem,5vw,3.5rem);align-items:start;
+  }
+  .founder img{
+    width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:var(--r-lg);
+    display:block;border-bottom:4px solid var(--rust);
+  }
+  .founder figcaption{margin-top:1rem;font-size:.85rem;line-height:1.5;color:rgba(23,27,20,.68);}
+  .founder figcaption b{
+    display:block;font-family:var(--font-d);font-size:1.5rem;letter-spacing:.04em;
+    text-transform:uppercase;color:var(--green);margin-bottom:.15rem;font-weight:400;
+  }
+  @media(max-width:640px){.intro-top{grid-template-columns:1fr;}.founder img{max-width:220px;}}
+  .intro-copy{
+    font-family:var(--font-d);font-size:clamp(1.9rem,4.6vw,4rem);line-height:1.08;
+    text-transform:uppercase;max-width:20em;
+  }
+  .intro-copy .word{display:inline-block;opacity:.14;}
+  .intro-copy .hl{color:var(--green);}
+  .intro-foot{
+    margin-top:3.5rem;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:2rem;border-top:1px solid var(--line);padding-top:2.4rem;
+  }
+  .intro-foot h3{font-size:1.35rem;letter-spacing:.05em;margin-bottom:.5rem;color:var(--green);}
+  .intro-foot p{font-size:.9rem;line-height:1.6;color:rgba(23,27,20,.7);}
+
+  /* ---------- fence draw divider ---------- */
+  .fence-divider{padding:0 0 1rem;overflow:hidden;}
+  .fence-divider svg{width:100%;height:auto;display:block;}
+
+  /* ---------- services (pinned horizontal) ---------- */
+  .services{background:var(--ink);color:var(--cream);position:relative;overflow:hidden;}
+  .svc-head{
+    position:absolute;top:0;left:0;right:0;z-index:5;
+    display:flex;justify-content:space-between;align-items:center;
+    padding:1.4rem clamp(1.2rem,4vw,3rem);pointer-events:none;
+  }
+  .svc-head .sec-label{color:var(--wheat);margin:0;}
+  .svc-head .sec-label::before{background:var(--wheat);}
+  .svc-count{font-family:var(--font-d);font-size:1.1rem;letter-spacing:.2em;color:rgba(244,240,230,.72);}
+  .svc-track{display:flex;height:100svh;}
+  .svc-panel{
+    flex:0 0 100vw;height:100%;display:flex;flex-direction:column;justify-content:center;
+    padding:6rem clamp(1.2rem,5vw,4.5rem) 3rem;position:relative;border-right:1px solid var(--line-lt);
+  }
+  .svc-num{
+    font-family:var(--font-d);font-size:clamp(5rem,16vw,11rem);line-height:1;
+    color:transparent;-webkit-text-stroke:1px rgba(244,240,230,.25);
+    position:absolute;top:4.5rem;right:clamp(1.2rem,5vw,4.5rem);
+  }
+  .svc-panel h3{
+    font-size:clamp(2.6rem,7vw,5.6rem);text-transform:uppercase;max-width:9em;margin-bottom:1.6rem;
+  }
+  .svc-panel h3 em{font-style:normal;color:var(--wheat);}
+  .svc-list{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:.6rem 2rem;
+    max-width:720px;list-style:none;
+  }
+  .svc-list li{
+    font-size:.92rem;color:rgba(244,240,230,.78);padding:.55rem 0;border-bottom:1px solid var(--line-lt);
+    display:flex;align-items:center;gap:.6rem;
+  }
+  .svc-list li::before{content:'';width:6px;height:6px;background:var(--rust);flex:none;transform:rotate(45deg);}
+  .svc-icon{position:absolute;bottom:2.2rem;right:clamp(1.2rem,5vw,4.5rem);width:clamp(90px,14vw,170px);opacity:.9;}
+  .svc-icon svg{width:100%;height:auto;}
+
+  /* ---------- service panel with photo portfolio (panel 01) ---------- */
+  .svc-panel--gallery{justify-content:center;}
+  .svc-panel-grid{
+    display:grid;grid-template-columns:minmax(0,1.05fr) minmax(260px,.95fr);
+    gap:clamp(1.8rem,4vw,3.5rem);align-items:center;width:100%;
+  }
+  .svc-panel--gallery h3{font-size:clamp(2.1rem,4.6vw,3.9rem);max-width:11em;margin-bottom:1.3rem;}
+  .svc-panel--gallery .svc-list{grid-template-columns:1fr;gap:.35rem;max-width:340px;}
+  .svc-panel--gallery .svc-list li{padding:.4rem 0;font-size:.88rem;}
+  .svc-gallery{
+    display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;
+    gap:.8rem;height:min(46vh,400px);
+  }
+  .svc-gallery figure{
+    margin:0;overflow:hidden;border-radius:var(--r-md);position:relative;
+    border:1px solid var(--line-lt);background:var(--ink-2);
+  }
+  .svc-gallery figure:first-child{grid-row:1 / 3;grid-column:1;}
+  .svc-gallery img,.svc-gallery video{
+    width:100%;height:100%;object-fit:cover;display:block;
+    filter:grayscale(.55) contrast(1.05) brightness(.9);
+    transform:scale(1.04);
+    transition:filter .5s ease,transform .6s ease;
+  }
+  .svc-gallery figure:hover img,.svc-gallery figure:hover video{filter:grayscale(0) contrast(1) brightness(1);transform:scale(1.1);}
+  .svc-gallery figure::after{
+    content:'';position:absolute;inset:0;pointer-events:none;
+    box-shadow:inset 0 0 0 1px rgba(244,240,230,.08);border-bottom:3px solid var(--rust);
+    opacity:0;transition:opacity .35s ease;
+  }
+  .svc-gallery figure:hover::after{opacity:1;}
+  @media(max-width:900px){
+    .svc-panel-grid{grid-template-columns:1fr;}
+    .svc-gallery{height:min(38vh,300px);margin-top:.5rem;}
+  }
+  .no-motion .svc-panel-grid{grid-template-columns:1fr;}
+  .no-motion .svc-gallery{height:340px;margin-top:1rem;}
+  .no-motion .svc-gallery img,.no-motion .svc-gallery video{filter:none;transform:none;}
+
+  .svc-progress{
+    position:absolute;bottom:0;left:0;right:0;height:3px;background:rgba(244,240,230,.12);z-index:5;
+  }
+  .svc-progress i{display:block;height:100%;width:100%;background:var(--wheat);transform-origin:left;transform:scaleX(0);}
+
+  /* ---------- growth section (wheat grows on scroll) ---------- */
+  .growth{
+    padding:clamp(5rem,12vw,9rem) clamp(1.2rem,4vw,3rem) 0;background:var(--cream-2);
+    text-align:center;overflow:hidden;
+  }
+  .growth h2{font-size:clamp(2.6rem,7vw,5.5rem);text-transform:uppercase;}
+  .growth h2 em{font-style:normal;color:var(--rust);}
+  .growth > p{max-width:52ch;margin:1.4rem auto 0;color:rgba(23,27,20,.72);line-height:1.7;font-size:.98rem;}
+  .growth .sec-label{justify-content:center;}
+  .growth-field{margin-top:2rem;position:relative;}
+  .growth-field svg{width:100%;height:auto;}
+  .growth-birds{position:absolute;inset:0;pointer-events:none;}
+
+  /* ---------- interactive ranch (3D) ---------- */
+  .ranch{padding:clamp(5rem,12vw,9rem) clamp(1.2rem,4vw,3rem);background:var(--cream);}
+  .ranch-head{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:1.5rem;margin-bottom:2.5rem;}
+  .ranch-head h2{font-size:clamp(2.6rem,7vw,5.5rem);text-transform:uppercase;}
+  .ranch-head h2 em{font-style:normal;color:var(--green);}
+  .ranch-head p{max-width:36ch;font-size:.92rem;line-height:1.6;color:rgba(23,27,20,.68);}
+  .ranch-stage{position:relative;border:1px solid var(--line);border-radius:var(--r-xl);background:#DCE8F2;overflow:hidden;aspect-ratio:16/7;}
+  .ranch-stage::after{
+    content:'';position:absolute;inset:0;z-index:1;pointer-events:none;border-radius:inherit;
+    background:radial-gradient(120% 90% at 50% 35%,transparent 60%,rgba(23,27,20,.18) 100%);
+    box-shadow:inset 0 0 0 1px rgba(23,27,20,.06);
+  }
+  #ranch-canvas{width:100%;height:100%;display:block;}
+  @media(max-width:760px){.ranch-stage{aspect-ratio:4/3;}}
+  .ranch-card{
+    position:absolute;left:clamp(.8rem,2vw,1.6rem);bottom:clamp(.8rem,2vw,1.6rem);z-index:2;
+    width:min(340px,calc(100% - 2rem));background:var(--ink);color:var(--cream);
+    padding:1.4rem 1.5rem;border-left:4px solid var(--wheat);border-radius:var(--r-md);opacity:0;transform:translateY(14px);
+    pointer-events:none;
+  }
+  .ranch-card h4{font-family:var(--font-d);font-size:1.6rem;letter-spacing:.05em;text-transform:uppercase;margin-bottom:.4rem;color:var(--wheat);}
+  .ranch-card p{font-size:.85rem;line-height:1.55;color:rgba(244,240,230,.85);}
+  .ranch-hint{margin-top:1rem;font-size:.75rem;letter-spacing:.25em;text-transform:uppercase;color:rgba(23,27,20,.66);text-align:center;}
+  .ranch-reset{
+    position:absolute;top:1rem;right:1rem;z-index:5;background:var(--ink);color:var(--cream);
+    border:none;cursor:pointer;padding:.65rem 1.2rem;border-radius:999px;
+    font-family:var(--font-b);font-size:.78rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
+    opacity:0;pointer-events:none;transition:opacity .25s ease,background .25s ease;
+  }
+  .ranch-reset.show{opacity:1;pointer-events:auto;}
+  .ranch-reset:hover{background:var(--rust);}
+  .ranch-chips{display:flex;flex-wrap:wrap;gap:.6rem;justify-content:center;margin-top:1.2rem;}
+  .ranch-chips button{cursor:pointer;background:transparent;border:1.5px solid var(--line);color:var(--ink);padding:.55rem 1.1rem;border-radius:999px;font-family:var(--font-b);font-size:.82rem;font-weight:600;transition:border-color .2s ease,color .2s ease,background .2s ease;}
+  .ranch-chips button:hover{border-color:var(--rust);color:var(--rust);}
+  .ranch-chips button[aria-pressed="true"]{background:var(--green);border-color:var(--green);color:var(--cream);}
+
+  /* ---------- CTA / contact ---------- */
+  .cta{background:var(--ink);color:var(--cream);padding:clamp(6rem,14vw,11rem) clamp(1.2rem,4vw,3rem) 2rem;position:relative;overflow:hidden;}
+  .cta .sec-label{color:var(--wheat);}
+  .cta .sec-label::before{background:var(--wheat);}
+  .cta h2{
+    font-size:clamp(3.4rem,11vw,10rem);text-transform:uppercase;line-height:.95;margin-bottom:3rem;
+  }
+  .cta h2 .line{display:block;overflow:hidden;}
+  .cta h2 .line > span{display:inline-block;transform:translateY(110%);}
+  .cta h2 em{font-style:normal;color:var(--wheat);}
+  .cta-row{
+    display:flex;flex-wrap:wrap;gap:2.5rem;justify-content:space-between;align-items:flex-start;
+    border-top:1px solid var(--line-lt);padding-top:2.5rem;
+  }
+  .cta-row .col h5{font-size:.72rem;letter-spacing:.3em;text-transform:uppercase;color:rgba(244,240,230,.68);margin-bottom:.7rem;font-weight:600;}
+  .cta-row .col a,.cta-row .col p{font-size:1.05rem;color:var(--cream);line-height:1.6;}
+  .cta-row .col a:hover{color:var(--wheat);}
+  .big-btn{
+    display:inline-flex;align-items:center;gap:1rem;background:var(--rust);color:var(--cream);
+    font-family:var(--font-d);font-size:1.5rem;letter-spacing:.08em;text-transform:uppercase;
+    padding:1.1rem 2.2rem;border-radius:999px;transition:background .3s ease,color .3s ease,transform .3s ease;
+  }
+  .big-btn:hover{background:var(--wheat);color:var(--ink);transform:translateY(-3px);}
+  footer{
+    margin-top:5rem;display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem;
+    font-size:.75rem;color:rgba(244,240,230,.6);letter-spacing:.08em;
+    border-top:1px solid var(--line-lt);padding-top:1.4rem;
+  }
+  .foot-word{
+    font-family:var(--font-d);font-size:clamp(4rem,13vw,12rem);color:rgba(244,240,230,.06);
+    text-transform:uppercase;line-height:1;text-align:center;margin-top:3rem;user-select:none;white-space:nowrap;
+  }
+
+  /* ---------- reduced motion (ui-ux-pro-max UX rule: High severity) ---------- */
+  .no-motion .loader-word span,.no-motion .loader-sub span,
+  .no-motion .hero h1 .line > span,.no-motion .cta h2 .line > span{transform:none;}
+  .no-motion .hero-kicker,.no-motion .hero-meta{opacity:1;}
+  .no-motion .intro-copy .word{opacity:1 !important;}
+  .no-motion .svc-track{display:block;height:auto;}
+  .no-motion .svc-panel{width:100%;min-height:70vh;border-right:none;border-bottom:1px solid var(--line-lt);}
+  .no-motion .svc-head{position:sticky;top:0;background:var(--ink);}
+  .no-motion .svc-progress{display:none;}
+  @media (prefers-reduced-motion: reduce){
+    .hero-scroll svg{animation:none;}
+    .skip-link{transition:none;}
+    html{scroll-behavior:auto;}
+  }
+</style>
 </head>
 <body>
-<!-- Navbar -->
-<header>
-  <div class="container header-container">
-    <a href="/" class="logo">Brandwood Ag Services</a>
-    
-<nav>
-  <ul class="nav-links" id="nav-links">
-    <li><a href="About/">About</a></li>
-    <li><a href="services/">Services</a></li>
-    <li><a href="contact/">Contact</a></li>
-    <li>
-      <a
-        href="https://www.instagram.com/brandwoodagservices"
-        target="_blank"
-        aria-label="Instagram"
-        class="social-icon"
-      >
-        <i class="fab fa-instagram"></i>
-      </a>
-    </li>
-  </ul>
-  <div class="hamburger" id="hamburger">
-    <span></span>
-    <span></span>
-    <span></span>
+
+<a class="skip-link" href="#about">Skip to content</a>
+<div class="grain"></div>
+
+<!-- ================= PRELOADER ================= -->
+<div id="loader">
+  <span class="logo-mark loader-logo" aria-hidden="true"></span>
+  <div class="loader-word" aria-hidden="true"></div>
+  <div class="loader-sub"><span>Ranch · Ag · Hunting Property Management</span></div>
+  <div class="loader-track">
+    <div class="loader-bar"></div>
+    <i style="left:20%"></i><i style="left:40%"></i><i style="left:60%"></i><i style="left:80%"></i>
   </div>
+  <div class="pct">0%</div>
+</div>
+
+<!-- ================= NAV ================= -->
+<nav id="nav">
+  <a class="logo" href="#top">
+    <span class="mark logo-mark" aria-hidden="true"></span>
+    BRANDWOOD AG SERVICES
+  </a>
+  <div class="nav-links" id="nav-links">
+    <a href="#about">About</a>
+    <a href="#services">Services</a>
+    <a href="#ranch">The Ranch</a>
+    <a class="nav-cta" href="#contact">Get In Touch</a>
+  </div>
+  <button class="nav-toggle" id="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+
+<!-- ================= HERO ================= -->
+<header class="hero" id="top">
+  <div class="hero-sky" aria-hidden="true">
+    <div class="sky-layer sky-sunset"></div>
+    <div class="sky-layer sky-dusk"></div>
+  </div>
+  <div class="hero-inner">
+    <div class="hero-kicker">California</div>
+    <h1>
+      <span class="line"><span>Built for</span></span>
+      <span class="line"><span><em>Working</em> Land</span></span>
+    </h1>
+    <div class="hero-meta">
+      <p> Ranch, agricultural, and hunting property management — fencing, fabrication, and the upkeep that keeps working land working.</p>
+      <div class="hero-meta-actions">
+        <a class="hero-btn" href="#contact">
+          Request an Estimate
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14m0 0l-6-6m6 6l-6 6"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+  <!-- layered valley landscape -->
+  <div class="hero-scape" aria-hidden="true">
+    <svg viewBox="0 0 1440 340" preserveAspectRatio="xMidYMax slice">
+      <defs>
+        <radialGradient id="sunGlow" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#D9A441" stop-opacity=".5"/>
+          <stop offset="100%" stop-color="#D9A441" stop-opacity="0"/>
+        </radialGradient>
+        <linearGradient id="gFar" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#A8C093"/>
+          <stop offset="100%" stop-color="#8FA678"/>
+        </linearGradient>
+        <linearGradient id="gMid" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#6D8C5C"/>
+          <stop offset="100%" stop-color="#4C6B41"/>
+        </linearGradient>
+        <linearGradient id="gNear" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#3E5D35"/>
+          <stop offset="100%" stop-color="#26391F"/>
+        </linearGradient>
+        <linearGradient id="haze" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#F4F0E6" stop-opacity=".6"/>
+          <stop offset="100%" stop-color="#F4F0E6" stop-opacity="0"/>
+        </linearGradient>
+        <filter id="cloudSoft" x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur stdDeviation="7"/>
+        </filter>
+      </defs>
+      <g opacity=".55" filter="url(#cloudSoft)" fill="#FFFFFF">
+        <ellipse cx="230" cy="95" rx="66" ry="15"/>
+        <ellipse cx="300" cy="105" rx="42" ry="11"/>
+        <ellipse cx="820" cy="60" rx="54" ry="12"/>
+      </g>
+      <g id="sun">
+        <circle cx="1150" cy="120" r="130" fill="url(#sunGlow)"/>
+        <circle cx="1150" cy="120" r="52" fill="#D9A441"/>
+      </g>
+      <path id="hill-far" d="M0,240 C220,150 420,210 640,180 C860,150 1040,220 1240,190 C1340,175 1400,190 1440,185 L1440,340 L0,340 Z" fill="url(#gFar)"/>
+      <path id="hill-mid" d="M0,280 C260,210 480,265 720,235 C960,205 1180,270 1440,240 L1440,340 L0,340 Z" fill="url(#gMid)"/>
+      <path id="hill-near" d="M0,340 C240,285 520,320 780,300 C1040,280 1240,320 1440,295 L1440,340 L0,340 Z" fill="url(#gNear)"/>
+      <!-- foreground fence -->
+      <g id="hero-fence" stroke="#171B14" stroke-width="4" stroke-linecap="round">
+        <line x1="60"  y1="330" x2="60"  y2="285"/>
+        <line x1="220" y1="333" x2="220" y2="288"/>
+        <line x1="380" y1="336" x2="380" y2="291"/>
+        <line x1="540" y1="333" x2="540" y2="288"/>
+        <path d="M40,296 C210,290 380,300 560,294" fill="none" stroke-width="3"/>
+        <path d="M40,314 C210,308 380,318 560,312" fill="none" stroke-width="3"/>
+      </g>
+    </svg>
   </div>
 </header>
 
-    <section class="hero">
-        <!-- Background Video -->
-        <video autoplay muted loop playsinline class="hero-video">
-            <source src="videos/3783928-hd_1920_1080_24fps.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
+<!-- ================= MARQUEE ================= -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <span>Livestock Fencing <b>◆</b> Ranch Management <b>◆</b> Hunting Properties <b>◆</b> Welding &amp; Fabrication <b>◆</b> Custom Structures <b>◆</b></span>
+    <span>Livestock Fencing <b>◆</b> Ranch Management <b>◆</b> Hunting Properties <b>◆</b> Welding &amp; Fabrication <b>◆</b> Custom Structures <b>◆</b></span>
+  </div>
+</div>
 
-        <!-- Hero Content -->
-        <div class="hero-content">
-            <img src="images/output-onlinepngtools (1).png" alt="Brandwood Agriculture Services Logo" class="hero-logo">
-            <h2>Rooted in California. Growing the Future of Agriculture.</h2>
-            <p>Your trusted partner in modern agricultural solutions.</p>
-            <a href="services/" class="btn-primary">Explore Services</a>
+<!-- ================= INTRO ================= -->
+<section class="intro" id="about">
+  <div class="sec-label">Who we are</div>
+  <div class="intro-top">
+    <figure class="founder reveal">
+      <img src="images/ProfilePicture.jpeg" alt="Zach Griffin, founder of Brandwood Ag Services, standing beside a vintage truck on a ranch property">
+      <figcaption><b>Zach Griffin</b>Founder, Brandwood Ag Services</figcaption>
+    </figure>
+    <p class="intro-copy" id="intro-copy">
+      "Every project is an opportunity to <span class="hl">build something that lasts</span>. We take pride in delivering <span class="hl">dependable workmanship</span> and <span class="hl">practical solutions</span> that help farms, ranches, and hunting properties operate at their best throughout <span class="hl">California</span>."
+    </p>
+  </div>
+  <div class="intro-foot">
+    <div class="reveal"><h3>Practical Solutions</h3><p>Real-world fixes shaped by years of hands-on agriculture and ranch operations — not guesswork.</p></div>
+    <div class="reveal"><h3>Dependable Workmanship</h3><p>We show up, we finish the job, and we stand behind every post we set and every weld we lay.</p></div>
+    <div class="reveal"><h3>Built to Last</h3><p>Fencing, structures, and repairs designed for long-term reliability under hard, daily use.</p></div>
+  </div>
+</section>
+
+<!-- fence line: posts rise from the ground, rails wipe across on scroll -->
+<div class="fence-divider" aria-hidden="true">
+  <svg viewBox="0 0 1440 150" preserveAspectRatio="none">
+    <defs>
+      <linearGradient id="postGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#D9BE8C"/>
+        <stop offset="100%" stop-color="#9C7440"/>
+      </linearGradient>
+      <linearGradient id="railGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#DFC895"/>
+        <stop offset="55%" stop-color="#C7A66B"/>
+        <stop offset="100%" stop-color="#96703D"/>
+      </linearGradient>
+      <filter id="fenceShadow" x="-20%" y="-30%" width="140%" height="160%">
+        <feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="#171B14" flood-opacity=".2"/>
+      </filter>
+      <clipPath id="railClip"><rect id="railClipRect" x="0" y="0" width="0" height="150"/></clipPath>
+    </defs>
+
+    <g filter="url(#fenceShadow)">
+      <g fill="#8B3E1F" opacity=".55">
+        <ellipse class="post-mulch" cx="120"  cy="134" rx="13" ry="4.5"/>
+        <ellipse class="post-mulch" cx="420"  cy="134" rx="13" ry="4.5"/>
+        <ellipse class="post-mulch" cx="720"  cy="134" rx="13" ry="4.5"/>
+        <ellipse class="post-mulch" cx="1020" cy="134" rx="13" ry="4.5"/>
+        <ellipse class="post-mulch" cx="1320" cy="134" rx="13" ry="4.5"/>
+      </g>
+
+      <g clip-path="url(#railClip)">
+        <rect x="0" y="44"  width="1440" height="10" fill="url(#railGrad)"/>
+        <rect x="0" y="76"  width="1440" height="10" fill="url(#railGrad)"/>
+        <rect x="0" y="108" width="1440" height="10" fill="url(#railGrad)"/>
+      </g>
+
+      <g stroke-linecap="square">
+        <line class="brace" x1="128"  y1="40" x2="412"  y2="128" stroke="#A67C43" stroke-width="7"/>
+        <line class="brace" x1="128"  y1="128" x2="412"  y2="40" stroke="#DFC090" stroke-width="7"/>
+        <line class="brace" x1="428"  y1="40" x2="712"  y2="128" stroke="#A67C43" stroke-width="7"/>
+        <line class="brace" x1="428"  y1="128" x2="712"  y2="40" stroke="#DFC090" stroke-width="7"/>
+        <line class="brace" x1="728"  y1="40" x2="1012" y2="128" stroke="#A67C43" stroke-width="7"/>
+        <line class="brace" x1="728"  y1="128" x2="1012" y2="40" stroke="#DFC090" stroke-width="7"/>
+        <line class="brace" x1="1028" y1="40" x2="1312" y2="128" stroke="#A67C43" stroke-width="7"/>
+        <line class="brace" x1="1028" y1="128" x2="1312" y2="40" stroke="#DFC090" stroke-width="7"/>
+      </g>
+
+      <g stroke="#5C4526" stroke-width="1" stroke-opacity=".4">
+        <rect class="post" x="112"  y="24" width="16" height="108" rx="1.5" fill="url(#postGrad)"/>
+        <rect class="post" x="412"  y="24" width="16" height="108" rx="1.5" fill="url(#postGrad)"/>
+        <rect class="post" x="712"  y="24" width="16" height="108" rx="1.5" fill="url(#postGrad)"/>
+        <rect class="post" x="1012" y="24" width="16" height="108" rx="1.5" fill="url(#postGrad)"/>
+        <rect class="post" x="1312" y="24" width="16" height="108" rx="1.5" fill="url(#postGrad)"/>
+      </g>
+
+      <g stroke="#5C4526" stroke-width=".75" stroke-opacity=".4">
+        <polygon class="post-cap" points="120,8 111,24 120,24"  fill="#EFDFB8"/>
+        <polygon class="post-cap" points="120,8 120,24 129,24"  fill="#C7A468"/>
+        <polygon class="post-cap" points="420,8 411,24 420,24"  fill="#EFDFB8"/>
+        <polygon class="post-cap" points="420,8 420,24 429,24"  fill="#C7A468"/>
+        <polygon class="post-cap" points="720,8 711,24 720,24"  fill="#EFDFB8"/>
+        <polygon class="post-cap" points="720,8 720,24 729,24"  fill="#C7A468"/>
+        <polygon class="post-cap" points="1020,8 1011,24 1020,24" fill="#EFDFB8"/>
+        <polygon class="post-cap" points="1020,8 1020,24 1029,24" fill="#C7A468"/>
+        <polygon class="post-cap" points="1320,8 1311,24 1320,24" fill="#EFDFB8"/>
+        <polygon class="post-cap" points="1320,8 1320,24 1329,24" fill="#C7A468"/>
+      </g>
+    </g>
+  </svg>
+</div>
+
+<!-- ================= SERVICES (pinned horizontal scroll) ================= -->
+<section class="services" id="services">
+  <div class="svc-head">
+    <div class="sec-label">What we do</div>
+    <div class="svc-count"><span id="svc-current">01</span> / 04</div>
+  </div>
+  <div class="svc-track" id="svc-track">
+
+    <article class="svc-panel svc-panel--gallery" data-index="01">
+      <div class="svc-num">01</div>
+      <div class="svc-panel-grid">
+        <div class="svc-panel-copy">
+          <h3>Ranch &amp; Ag <em>Property Management</em></h3>
+          <ul class="svc-list">
+            <li>Agricultural property maintenance</li>
+            <li>Road grading</li>
+            <li>Pasture maintenance</li>
+            <li>Gate installation</li>
+            <li>Water system repairs</li>
+            <li>General property enhancements</li>
+          </ul>
         </div>
-    </section>
-
-
-
-    <!-- About Section -->
-    <section id="about" class="section">
-        <div class="container">
-            <h2>Who We Are</h2>
-        <p>Founded in Gilroy, CA, Brandwood Ag Services LLC proudly supports farmers across the Golden State. We serve a wide range of crops — from row crops and orchards to specialty varieties — offering products tailored to improve yield, soil health, and sustainability.</p>
+        <div class="svc-gallery">
+          <figure><img src="images/Ranch&amp;Ag1.jpeg" alt="Mini excavator clearing ground on a Central Valley ranch property" loading="lazy"></figure>
+          <figure><img src="images/Ranch&amp;Ag2.jpg" alt="Well-maintained orchard rows on an agricultural property" loading="lazy"></figure>
+          <figure><img src="images/Ranch&amp;Ag3.jpg" alt="Tractor working a field during routine property maintenance" loading="lazy"></figure>
         </div>
-    </section>
+      </div>
+    </article>
 
-    <!-- Services Section -->
-    <section id="services" class="section bg-light">
-        <div class="container">
-            <h2>Our Services</h2>
-            <div class="service-grid">
-                <div class="service-box">
-                    <h3>Crop Consulting</h3>
-                    <p>Expert guidance to maximize yield and ensure sustainable farming practices.</p>
-                </div>
-                <div class="service-box">
-                    <h3>Soil Testing</h3>
-                    <p>Comprehensive soil analysis for optimal nutrient management and productivity.</p>
-                </div>
-                <div class="service-box">
-                    <h3>Farm Management</h3>
-                    <p>Tailored solutions to streamline operations and improve efficiency on your farm.</p>
-                </div>
-            </div>
+    <article class="svc-panel svc-panel--gallery" data-index="02">
+      <div class="svc-num">02</div>
+      <div class="svc-panel-grid">
+        <div class="svc-panel-copy">
+          <h3>Hunting <em>Ranch Management</em></h3>
+          <ul class="svc-list">
+            <li>Blind installation &amp; repair</li>
+            <li>Access road maintenance</li>
+            <li>Fence &amp; gate construction</li>
+            <li>Seasonal property upkeep</li>
+            <li>Habitat &amp; grounds enhancements</li>
+          </ul>
         </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="section">
-        <div class="container">
-            <h2>Ready to Work Together?</h2>
-            <p>Have questions or want to work with us? Get in touch!</p>
-            <a href="contact/" class="btn-contact">Contact Us</a>
+        <div class="svc-gallery">
+          <figure>
+            <video class="svc-video" src="videos/HuntVid.MOV" poster="images/Hunt1.jpeg" muted loop playsinline autoplay preload="metadata" aria-label="Video tour of a hunting property access road and fence line"></video>
+          </figure>
+          <figure><img src="images/Hunt1.jpeg" alt="Fence line along a hunting property access road bordered by orchard trees" loading="lazy"></figure>
+          <figure><img src="images/Hunt2.jpeg" alt="Graded access road and fence line on a hunting property" loading="lazy"></figure>
         </div>
-    </section>
+      </div>
+    </article>
 
-    <!-- Footer -->
-    <footer>
-        <p>&copy; 2025 Brandwood Agriculture Services, LLC.</p>
-    </footer>
-    <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const hamburger = document.getElementById('hamburger');
-    const navLinks = document.getElementById('nav-links');
+    <article class="svc-panel svc-panel--gallery" data-index="03">
+      <div class="svc-num">03</div>
+      <div class="svc-panel-grid">
+        <div class="svc-panel-copy">
+          <h3>Livestock Fencing <em>&amp; Structures</em></h3>
+          <ul class="svc-list">
+            <li>Durable livestock fencing</li>
+            <li>Corrals &amp; working pens</li>
+            <li>Loading facilities</li>
+            <li>Corral improvements</li>
+            <li>Custom ranch structures</li>
+          </ul>
+        </div>
+        <div class="svc-gallery">
+          <figure><img src="images/Fencing3.jpeg" alt="Setting a fence post from the truck bed during a livestock fencing job" loading="lazy"></figure>
+          <figure><img src="images/Fencing1.JPEG" alt="Heavy-duty livestock corral panel fabricated for a ranch property" loading="lazy"></figure>
+          <figure><img src="images/Fencing2.JPEG" alt="Stack of custom livestock corral panels ready for installation" loading="lazy"></figure>
+        </div>
+      </div>
+    </article>
 
-    hamburger.addEventListener('click', () => {
-      navLinks.classList.toggle('active');
+    <article class="svc-panel svc-panel--gallery" data-index="04">
+      <div class="svc-num">04</div>
+      <div class="svc-panel-grid">
+        <div class="svc-panel-copy">
+          <h3>Welding <em>&amp; Fabrication</em></h3>
+          <ul class="svc-list">
+            <li>Mobile &amp; shop welding</li>
+            <li>Equipment repair</li>
+            <li>Trailer repair</li>
+            <li>Structural steel fabrication</li>
+            <li>Custom gates</li>
+            <li>Ranch infrastructure</li>
+          </ul>
+        </div>
+        <div class="svc-gallery">
+          <figure><img src="images/Welding2.JPEG" alt="Fanned stack of raw steel pipe stock for fabrication work" loading="lazy"></figure>
+          <figure><img src="images/Welding1.JPEG" alt="Steel pipe stock staged on a trailer for a welding and fabrication job" loading="lazy"></figure>
+          <figure><img src="images/Welding3.JPEG" alt="Steel pipe stock organized on-site ahead of fabrication" loading="lazy"></figure>
+        </div>
+      </div>
+    </article>
+
+  </div>
+  <div class="svc-progress"><i id="svc-bar"></i></div>
+</section>
+
+<!-- ================= GROWTH ================= -->
+<section class="growth">
+  <div class="sec-label">Season after season</div>
+  <h2>Care that <em>grows</em> value</h2>
+  <p>From spring pasture work to fall hunting season prep, steady maintenance compounds. Well-kept ground, tight fences, and reliable infrastructure keep your operation productive year after year.</p>
+  <div class="growth-field" aria-hidden="true">
+    <svg id="wheat-svg" viewBox="0 0 1440 260" preserveAspectRatio="xMidYMax meet"></svg>
+    <svg id="birds-svg" class="growth-birds" viewBox="0 0 1440 260" preserveAspectRatio="xMidYMax meet"></svg>
+  </div>
+</section>
+
+<!-- ================= VALUES ================= -->
+<!-- ================= INTERACTIVE RANCH (3D) ================= -->
+<section class="ranch" id="ranch">
+  <div class="ranch-head">
+    <h2>Explore <em>the ranch</em></h2>
+    <p>Every corner of a working property needs attention. Fly into each spot to see how we keep it running.</p>
+  </div>
+  <div class="ranch-stage" id="ranch-stage">
+    <canvas id="ranch-canvas" role="img" aria-label="Interactive 3D map of a working ranch — use the location buttons below to explore services"></canvas>
+    <div class="ranch-card" id="ranch-card">
+      <h4 id="ranch-card-title">Custom Ranch Structures</h4>
+      <p id="ranch-card-text">Barns, shelters, and custom structures built for the way your operation actually runs.</p>
+    </div>
+    <button class="ranch-reset" id="ranch-reset" type="button">↩ &nbsp;View full ranch</button>
+  </div>
+  <div class="ranch-chips" role="group" aria-label="Ranch locations">
+    <button type="button" data-spot="barn" aria-pressed="false">Barn &amp; Structures</button>
+    <button type="button" data-spot="water" aria-pressed="false">Water Systems</button>
+    <button type="button" data-spot="corral" aria-pressed="false">Corrals &amp; Fencing</button>
+    <button type="button" data-spot="blind" aria-pressed="false">Hunting Grounds</button>
+    <button type="button" data-spot="truck" aria-pressed="false">Welding Shop</button>
+    <button type="button" data-spot="road" aria-pressed="false">Roads &amp; Access</button>
+  </div>
+  <p class="ranch-hint">◆ &nbsp;Click a marker or location button to fly in — "View full ranch" zooms out&nbsp; ◆</p>
+</section>
+
+<!-- ================= CTA / CONTACT ================= -->
+<section class="cta" id="contact">
+  <div class="sec-label">Get in touch</div>
+  <h2 id="cta-title">
+    <span class="line"><span>Let's put in</span></span>
+    <span class="line"><span>the <em>work.</em></span></span>
+  </h2>
+  <a class="big-btn" href="mailto:pennocksystems@gmail.com">Request an estimate
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14m0 0l-6-6m6 6l-6 6"/></svg>
+  </a>
+  <div class="cta-row" style="margin-top:3.5rem;">
+    <div class="col">
+      <h5>Service Area</h5>
+      <p>California's<br>Farms · Ranches · Hunting Properties</p>
+    </div>
+    <div class="col">
+      <h5>Email</h5>
+      <!-- TODO: replace with the business contact email -->
+      <a href="mailto:pennocksystems@gmail.com">pennocksystems@gmail.com</a>
+    </div>
+    <div class="col">
+      <h5>Phone</h5>
+      <!-- TODO: replace with the business phone number -->
+      <a href="tel:+15550000000">(555) 000-0000</a>
+    </div>
+  </div>
+  <div class="foot-word" aria-hidden="true">Brandwood Ag</div>
+  <footer>
+    <span><span class="logo-mark foot-logo" aria-hidden="true"></span>© 2026 Brandwood Ag Services</span>
+    <span>Built to withstand the demands of working land.</span>
+  </footer>
+</section>
+
+<!-- ================= SCRIPTS ================= -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<!-- post-processing (bloom + color grade), matched to the r128 core build above -->
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/EffectComposer.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/RenderPass.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/ShaderPass.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/shaders/CopyShader.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/shaders/LuminosityHighPassShader.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/UnrealBloomPass.js"></script>
+<script>
+gsap.registerPlugin(ScrollTrigger);
+
+/* respect prefers-reduced-motion (ui-ux-pro-max: High severity) */
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+if(reduceMotion){
+  document.documentElement.classList.add('no-motion');
+  document.getElementById('loader').style.display = 'none';
+  document.querySelectorAll('.svc-gallery video').forEach(v=>{
+    v.removeAttribute('autoplay');
+    v.removeAttribute('loop');
+    v.pause();
+    v.setAttribute('controls','');
+  });
+}
+/* pin sections need a refresh once fonts/layout settle (gsap preset note) */
+window.addEventListener('load', () => ScrollTrigger.refresh());
+
+/* ============ preloader word split ============ */
+(function(){
+  const el = document.querySelector('.loader-word');
+  const text = 'BRANDWOOD AG';
+  const agStart = text.indexOf('AG');
+  [...text].forEach((ch,i)=>{
+    const s = document.createElement('span');
+    s.textContent = ch;
+    if(i >= agStart) s.classList.add('wheat');
+    el.appendChild(s);
+  });
+})();
+
+/* ============ preloader timeline ============ */
+const pctEl = document.querySelector('#loader .pct');
+const progress = {v:0};
+
+if(!reduceMotion) gsap.timeline()
+  .to('.loader-word span',{y:0,duration:.9,stagger:.045,ease:'power4.out'})
+  .to('.loader-sub span',{y:0,duration:.7,ease:'power3.out'},'-=.5')
+  .to(progress,{
+    v:100,duration:1.8,ease:'power2.inOut',
+    onUpdate:()=>{ pctEl.textContent = Math.round(progress.v)+'%'; }
+  },'-=.4')
+  .to('.loader-bar',{scaleX:1,duration:1.8,ease:'power2.inOut'},'<')
+  .to('.loader-word span',{y:'-110%',duration:.6,stagger:.03,ease:'power3.in'},'+=.15')
+  .to(['.loader-sub','.loader-track','#loader .pct'],{opacity:0,duration:.3},'<')
+  .to('#loader',{yPercent:-100,duration:.9,ease:'power4.inOut'})
+  .set('#loader',{display:'none'})
+  // hero entrance
+  .to('.hero h1 .line > span',{y:0,duration:1.1,stagger:.12,ease:'power4.out'},'-=.55')
+  .to('.hero-kicker',{opacity:1,duration:.8,ease:'power2.out'},'-=.8')
+  .to('.hero-meta',{opacity:1,duration:.8,ease:'power2.out'},'-=.6');
+
+/* ============ nav: persistent glass, deepens once scrolled ============ */
+const nav = document.getElementById('nav');
+window.addEventListener('scroll',()=>{
+  nav.classList.toggle('scrolled', window.scrollY > 40);
+},{passive:true});
+
+/* ============ mobile nav menu ============ */
+(function(){
+  const toggle = document.getElementById('nav-toggle');
+  const links = document.getElementById('nav-links');
+  if(!toggle || !links) return;
+  function closeMenu(){
+    toggle.setAttribute('aria-expanded','false');
+    links.classList.remove('open');
+  }
+  function openMenu(){
+    toggle.setAttribute('aria-expanded','true');
+    links.classList.add('open');
+  }
+  toggle.addEventListener('click', ()=>{
+    const isOpen = toggle.getAttribute('aria-expanded') === 'true';
+    isOpen ? closeMenu() : openMenu();
+  });
+  links.querySelectorAll('a').forEach(a=> a.addEventListener('click', closeMenu));
+  document.addEventListener('keydown', e=>{ if(e.key === 'Escape') closeMenu(); });
+  window.addEventListener('resize', ()=>{ if(window.innerWidth > 760) closeMenu(); });
+})();
+
+/* ============ hero parallax (layered speeds per gsap parallax preset) ============ */
+if(!reduceMotion){
+  const heroST = {trigger:'.hero',start:'top top',end:'bottom top',scrub:0.5};
+  gsap.to('#sun',{y:70,scrollTrigger:heroST});
+  gsap.to('#hill-far',{y:30,scrollTrigger:heroST});
+  gsap.to('#hill-mid',{y:15,scrollTrigger:heroST});
+  gsap.to('.hero h1',{yPercent:18,opacity:.25,scrollTrigger:heroST});
+
+  /* sky warms into a sunset, then fades to dusk, as the sun sets behind the hills */
+  gsap.timeline({scrollTrigger:heroST})
+    .to('.sky-sunset',{opacity:1,duration:1,ease:'none'},0)
+    .to('.sky-dusk',{opacity:1,duration:1,ease:'none'},0.55);
+
+  /* marquee */
+  gsap.to('.marquee-track',{xPercent:-50,repeat:-1,duration:22,ease:'none'});
+}
+
+/* ============ intro word-by-word scrub reveal ============ */
+(function(){
+  const p = document.getElementById('intro-copy');
+  const nodes = [...p.childNodes];
+  p.innerHTML = '';
+  nodes.forEach(node=>{
+    const isHl = node.nodeType === 1;
+    (node.textContent||'').split(/\s+/).filter(Boolean).forEach(w=>{
+      const s = document.createElement('span');
+      s.className = 'word' + (isHl ? ' hl' : '');
+      s.textContent = w;
+      p.appendChild(s);
+      p.appendChild(document.createTextNode(' '));
     });
   });
+  if(!reduceMotion) gsap.to('#intro-copy .word',{
+    opacity:1,stagger:.05,ease:'none',
+    scrollTrigger:{trigger:'#intro-copy',start:'top 80%',end:'bottom 50%',scrub:true}
+  });
+})();
+
+/* ============ generic reveals (gsap preset: Scroll Reveal — Standard) ============ */
+if(!reduceMotion){
+  gsap.utils.toArray('.reveal').forEach(el=>{
+    gsap.from(el,{y:24,opacity:0,duration:.5,ease:'power2.out',
+      scrollTrigger:{trigger:el,start:'top 85%'}});
+  });
+
+  /* fence divider: posts rise, rails wipe across, then cross-braces draw in */
+  const fenceBraces = gsap.utils.toArray('.fence-divider .brace');
+  gsap.set('.fence-divider .post',{scaleY:0,transformOrigin:'50% 100%'});
+  gsap.set('.fence-divider .post-cap,.fence-divider .post-mulch',{opacity:0});
+  fenceBraces.forEach(el=>{
+    const len = el.getTotalLength();
+    gsap.set(el,{strokeDasharray:len,strokeDashoffset:len});
+  });
+  gsap.timeline({
+    scrollTrigger:{trigger:'.fence-divider',start:'top 95%',end:'top 25%',scrub:1}
+  })
+  .to('.fence-divider .post',{scaleY:1,stagger:.1,ease:'power2.out'})
+  .to('.fence-divider .post-cap,.fence-divider .post-mulch',{opacity:1,stagger:.1,ease:'none'},'<')
+  .to('#railClipRect',{attr:{width:1440},ease:'power1.out'},'<0.15')
+  .to(fenceBraces,{strokeDashoffset:0,stagger:.05,ease:'power1.inOut'},'<0.2');
+}
+
+/* ============ services: pinned horizontal scroll ============ */
+(function(){
+  if(reduceMotion) return; // panels stack vertically via .no-motion CSS
+  const track = document.getElementById('svc-track');
+  const panels = gsap.utils.toArray('.svc-panel');
+  const current = document.getElementById('svc-current');
+  const getDist = () => track.scrollWidth - window.innerWidth;
+
+  const tween = gsap.to(track,{
+    x:()=>-getDist(),ease:'none',
+    scrollTrigger:{
+      trigger:'.services',start:'top top',
+      end:()=>'+='+getDist(),
+      pin:true,scrub:1,invalidateOnRefresh:true,
+      onUpdate(self){
+        gsap.set('#svc-bar',{scaleX:self.progress});
+        const idx = Math.min(panels.length-1, Math.floor(self.progress*panels.length));
+        current.textContent = String(idx+1).padStart(2,'0');
+      }
+    }
+  });
+
+  // per-panel content slides in as it enters view
+  panels.forEach(panel=>{
+    gsap.from(panel.querySelectorAll('h3, .svc-list li, .svc-gallery figure'),{
+      y:40,opacity:0,stagger:.05,duration:.7,ease:'power3.out',
+      scrollTrigger:{trigger:panel,containerAnimation:tween,start:'left 70%'}
+    });
+  });
+})();
+
+/* ============ wheat field: build + grow on scroll ============ */
+(function(){
+  const svg = document.getElementById('wheat-svg');
+  const NS = 'http://www.w3.org/2000/svg';
+  const stalks = [];
+  const N = 36;
+  for(let i=0;i<N;i++){
+    const x = 30 + i*(1380/(N-1)) + (Math.random()*18-9);
+    const h = 110 + Math.random()*110;
+    const sway = Math.random()*8-4;
+    const g = document.createElementNS(NS,'g');
+    g.setAttribute('style',`transform-origin:${x}px 260px;`);
+    const stem = document.createElementNS(NS,'path');
+    stem.setAttribute('d',`M${x},260 C${x+2},${260-h*.5} ${x-3},${260-h*.8} ${x+sway},${260-h}`);
+    stem.setAttribute('stroke','#33502C');stem.setAttribute('stroke-width','3');
+    stem.setAttribute('fill','none');stem.setAttribute('stroke-linecap','round');
+    g.appendChild(stem);
+    const head = document.createElementNS(NS,'g');
+    for(let k=0;k<5;k++){
+      const e = document.createElementNS(NS,'ellipse');
+      const side = k%2?1:-1;
+      const cx = x + sway + side*5, cy = 260-h + k*9 - 2;
+      e.setAttribute('cx',cx);e.setAttribute('cy',cy);
+      e.setAttribute('rx','4.6');e.setAttribute('ry','8');
+      e.setAttribute('fill', Math.random()>.5 ? '#D9A441' : '#C8912F');
+      e.setAttribute('transform',`rotate(${side*28} ${cx} ${cy})`);
+      head.appendChild(e);
+    }
+    g.appendChild(head);
+    svg.appendChild(g);
+    stalks.push({g,head});
+  }
+  if(reduceMotion) return; // field renders fully grown, no sway
+  const order = gsap.utils.shuffle(stalks.map(s=>s.g));
+  gsap.set(order,{scaleY:0});
+  gsap.set(stalks.map(s=>s.head),{opacity:0});
+  gsap.timeline({
+    scrollTrigger:{trigger:'.growth-field',start:'top 85%',end:'bottom 65%',scrub:1}
+  })
+  .to(order,{scaleY:1,stagger:.02,ease:'power2.out'})
+  .to(stalks.map(s=>s.head),{opacity:1,stagger:.015,ease:'none'},'-=.3');
+  // idle sway
+  gsap.to(svg.querySelectorAll(':scope > g'),{
+    rotation:1.6,duration:2.6,yoyo:true,repeat:-1,ease:'sine.inOut',
+    stagger:{each:.06,from:'random'}
+  });
+})();
+
+/* ============ birds glide over/through the crop ============ */
+(function(){
+  const svg = document.getElementById('birds-svg');
+  if(!svg) return;
+  const NS = 'http://www.w3.org/2000/svg';
+  const rows = [
+    {y:24,  dur:19, delay:0},
+    {y:52,  dur:24, delay:3.5},
+    {y:96,  dur:16, delay:1.5},
+    {y:68,  dur:21, delay:6},
+    {y:132, dur:27, delay:2.5}
+  ];
+  rows.forEach((row,i)=>{
+    const bird = document.createElementNS(NS,'path');
+    bird.setAttribute('d','M-9,0 Q-4.5,-7 0,0 Q4.5,-7 9,0');
+    bird.setAttribute('fill','none');
+    bird.setAttribute('stroke','#20301A');
+    bird.setAttribute('stroke-width','2.6');
+    bird.setAttribute('stroke-linecap','round');
+    bird.setAttribute('opacity','.7');
+    svg.appendChild(bird);
+
+    const scale = .8 + Math.random()*.4;
+    const restX = 150 + i*280 + Math.random()*80;
+    gsap.set(bird,{x:restX,y:row.y,scale,transformOrigin:'50% 50%'});
+    if(reduceMotion) return;
+
+    gsap.set(bird,{x:-40});
+    gsap.to(bird,{x:1480,duration:row.dur,delay:row.delay,repeat:-1,ease:'none'});
+    gsap.to(bird,{y:row.y-16,duration:row.dur/8,yoyo:true,repeat:-1,ease:'sine.inOut',delay:row.delay});
+    gsap.to(bird,{scaleY:scale*.35,duration:.22,yoyo:true,repeat:-1,ease:'sine.inOut',delay:Math.random()*1.5});
+  });
+})();
+
+/* ============ interactive ranch scene (3D) ============ */
+(function(){
+  const SPOTS = {
+    barn:  {t:'Custom Ranch Structures', d:'Barns, shelters, and custom structures built for the way your operation actually runs — plus general property enhancements.'},
+    water: {t:'Water System Repairs',    d:'Stock water, tanks, and delivery systems repaired and maintained so your livestock and ground never go dry.'},
+    corral:{t:'Corrals & Working Pens',  d:'Durable livestock fencing, corrals, working pens, and loading facilities designed for long-term reliability.'},
+    blind: {t:'Hunting Property Services', d:'Blind installation and repair, access road maintenance, and seasonal upkeep that keeps your hunting property ready.'},
+    truck: {t:'Mobile Welding & Fabrication', d:'Mobile and shop welding — equipment repair, trailer repair, structural steel fabrication, and custom gates.'},
+    road:  {t:'Road Grading & Access',   d:'Road grading, access road maintenance, and gate installation to keep every corner of the property reachable.'}
+  };
+  const canvas = document.getElementById('ranch-canvas');
+  if(!canvas || !window.THREE) return;
+  const card = document.getElementById('ranch-card');
+  const cardTitle = document.getElementById('ranch-card-title');
+  const cardText = document.getElementById('ranch-card-text');
+  const resetBtn = document.getElementById('ranch-reset');
+  const chips = document.querySelectorAll('.ranch-chips button');
+  let active = null;
+
+  /* --- renderer / scene / camera --- */
+  const renderer = new THREE.WebGLRenderer({canvas, antialias:true});
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.shadowMap.enabled = true;
+  renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+  if(THREE.sRGBEncoding !== undefined) renderer.outputEncoding = THREE.sRGBEncoding;
+  if(THREE.ACESFilmicToneMapping !== undefined){
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.18;
+  }
+  const scene = new THREE.Scene();
+  function skyTexture(){
+    const c = document.createElement('canvas'); c.width = 2; c.height = 256;
+    const ctx = c.getContext('2d');
+    const g = ctx.createLinearGradient(0,0,0,256);
+    g.addColorStop(0,'#6FAEDE'); g.addColorStop(.4,'#9DCBE6'); g.addColorStop(.72,'#E9D9AE'); g.addColorStop(1,'#F1D9A8');
+    ctx.fillStyle = g; ctx.fillRect(0,0,2,256);
+    const tex = new THREE.CanvasTexture(c);
+    if(THREE.sRGBEncoding !== undefined) tex.encoding = THREE.sRGBEncoding;
+    return tex;
+  }
+  scene.background = skyTexture();
+  scene.fog = new THREE.Fog(0xDCC99A, 105, 220);
+  const camera = new THREE.PerspectiveCamera(38, 16/7, .1, 400);
+  const HOME_POS = new THREE.Vector3(0, 40, 58);
+  const HOME_TGT = new THREE.Vector3(0, 0, -4);
+  const camTgt = HOME_TGT.clone();
+  camera.position.copy(HOME_POS);
+  camera.lookAt(camTgt);
+
+  /* --- post-processing: bloom (marker/highlight glow) + filmic vignette & grade --- */
+  let composer = null, bloomPass = null;
+  if(window.THREE && THREE.EffectComposer && THREE.UnrealBloomPass){
+    const size = new THREE.Vector2();
+    renderer.getSize(size);
+    const pr = renderer.getPixelRatio();
+    const rt = new THREE.WebGLRenderTarget(size.x*pr, size.y*pr, {
+      minFilter:THREE.LinearFilter, magFilter:THREE.LinearFilter, format:THREE.RGBAFormat,
+      encoding: THREE.sRGBEncoding !== undefined ? THREE.sRGBEncoding : undefined
+    });
+    composer = new THREE.EffectComposer(renderer, rt);
+    composer.addPass(new THREE.RenderPass(scene, camera));
+    /* threshold must sit above this scene's tone-mapped ambient brightness (grass alone reads ~.8 luma)
+       or the additive bloom composite blows the whole frame out to white; .93 keeps it to genuine
+       highlights (marker glow, sun glints, water) */
+    bloomPass = new THREE.UnrealBloomPass(size.clone(), .3, .45, .93);
+    composer.addPass(bloomPass);
+    const GradeShader = {
+      uniforms:{ tDiffuse:{value:null}, vigStrength:{value:.32}, vigSoftness:{value:.42}, warmth:{value:.035}, saturation:{value:1.1}, contrast:{value:1.06} },
+      vertexShader:`varying vec2 vUv; void main(){ vUv = uv; gl_Position = projectionMatrix * modelViewMatrix * vec4(position,1.0); }`,
+      fragmentShader:`
+        uniform sampler2D tDiffuse;
+        uniform float vigStrength, vigSoftness, warmth, saturation, contrast;
+        varying vec2 vUv;
+        void main(){
+          vec4 color = texture2D(tDiffuse, vUv);
+          color.rgb = (color.rgb - .5) * contrast + .5;
+          float luma = dot(color.rgb, vec3(.299,.587,.114));
+          color.rgb = mix(vec3(luma), color.rgb, saturation);
+          color.rgb += vec3(warmth, warmth*.4, -warmth*.6);
+          float dist = length(vUv - .5);
+          float vig = smoothstep(vigSoftness, .75, dist);
+          color.rgb *= 1.0 - vig*vigStrength;
+          gl_FragColor = color;
+        }`
+    };
+    const gradePass = new THREE.ShaderPass(GradeShader);
+    gradePass.renderToScreen = true;
+    composer.addPass(gradePass);
+  }
+
+  /* --- environment map: soft sky reflections on metal/glass/water --- */
+  try{
+    const pmrem = new THREE.PMREMGenerator(renderer);
+    const envScene = new THREE.Scene();
+    const envTex = skyTexture();
+    envTex.mapping = THREE.EquirectangularReflectionMapping;
+    envScene.background = envTex;
+    scene.environment = pmrem.fromScene(envScene, 0.035).texture;
+    pmrem.dispose();
+  }catch(e){}
+
+  /* --- lights --- */
+  scene.add(new THREE.HemisphereLight(0xEAF2FA, 0x5C6F42, .78));
+  const sunL = new THREE.DirectionalLight(0xFFD9A0, 1.55);
+  sunL.position.set(-40, 55, 25);
+  sunL.castShadow = true;
+  sunL.shadow.mapSize.set(2048, 2048);
+  sunL.shadow.camera.left = -75; sunL.shadow.camera.right = 75;
+  sunL.shadow.camera.top = 75; sunL.shadow.camera.bottom = -75;
+  sunL.shadow.camera.far = 180;
+  sunL.shadow.bias = -0.0018;
+  sunL.shadow.radius = 1.6;
+  sunL.shadow.camera.updateProjectionMatrix();
+  scene.add(sunL);
+  const fillL = new THREE.DirectionalLight(0xBFD9EA, .22);
+  fillL.position.set(45, 22, -35);
+  scene.add(fillL);
+  const rimL = new THREE.DirectionalLight(0xFFF0D2, .35);
+  rimL.position.set(18, 14, 50);
+  scene.add(rimL);
+
+  /* --- materials + builders --- */
+  const mat = (c,r,m) => new THREE.MeshStandardMaterial({color:c, roughness:r===undefined?.92:r, metalness:m||0});
+  /* procedural mottled ground textures so grass/dirt read as textured, not flat color (closer to the richer, grounded look of polished digital-farm tours) */
+  function mottleTexture(base, spots, size){
+    size = size || 128;
+    const c = document.createElement('canvas'); c.width = c.height = size;
+    const ctx = c.getContext('2d');
+    ctx.fillStyle = base; ctx.fillRect(0,0,size,size);
+    spots.forEach(s=>{
+      ctx.fillStyle = s.c; ctx.globalAlpha = s.a===undefined?1:s.a;
+      for(let n=0;n<s.n;n++){
+        const x = Math.random()*size, y = Math.random()*size, r = s.r0 + Math.random()*(s.r1-s.r0);
+        ctx.beginPath(); ctx.ellipse(x,y,r,r*(.55+Math.random()*.4),Math.random()*Math.PI,0,Math.PI*2); ctx.fill();
+      }
+    });
+    ctx.globalAlpha = 1;
+    const tex = new THREE.CanvasTexture(c);
+    tex.wrapS = tex.wrapT = THREE.RepeatWrapping;
+    if(THREE.sRGBEncoding !== undefined) tex.encoding = THREE.sRGBEncoding;
+    return tex;
+  }
+  const grassTex = mottleTexture('#6E9052', [{c:'#5E7E44',n:70,r0:3,r1:9,a:.55},{c:'#84A664',n:55,r0:2,r1:6,a:.5}]);
+  grassTex.repeat.set(30,20);
+  const fieldTex = mottleTexture('#5C7938', [{c:'#4C6A2A',n:40,r0:4,r1:10,a:.55},{c:'#71914A',n:34,r0:2,r1:5,a:.45}]);
+  fieldTex.repeat.set(9,5);
+  const dirtTex = mottleTexture('#A87F49', [{c:'#8A6538',n:75,r0:1.4,r1:4,a:.5},{c:'#C2A063',n:55,r0:1,r1:3,a:.45}]);
+  dirtTex.repeat.set(34,3);
+  const M = {
+    grass:new THREE.MeshStandardMaterial({map:grassTex, roughness:.96}),
+    field:new THREE.MeshStandardMaterial({map:fieldTex, roughness:.94}),
+    dirt:new THREE.MeshStandardMaterial({map:dirtTex, roughness:.9}),
+    barn:mat(0xA24E1D,.5), roof:mat(0x7C3712,.38), wood:mat(0x4E3A22,.85),
+    steel:mat(0xC8CDC3,.3,.78), dark:mat(0x24271F,.5), green:mat(0x2C4524,.82),
+    pine:mat(0x2E3B22,.88), trunk:mat(0x5E3F24,.9), tank:mat(0x71818C,.32,.58),
+    water:mat(0x5F97B4,.12,.2), cream:mat(0xF4F0E6,.65), brown:mat(0x7C4B2E,.82),
+    glass:mat(0xDCE8F2,.05,.25)
+  };
+  function add(mesh, x, y, z, parent){
+    mesh.position.set(x, y, z);
+    mesh.castShadow = mesh.receiveShadow = true;
+    (parent || scene).add(mesh);
+    return mesh;
+  }
+  const box  = (w,h,d,m,x,y,z,p) => add(new THREE.Mesh(new THREE.BoxGeometry(w,h,d), m), x,y,z,p);
+  const cyl  = (r,h,m,x,y,z,p,seg) => add(new THREE.Mesh(new THREE.CylinderGeometry(r,r,h,seg||12), m), x,y,z,p);
+  const cone = (r,h,m,x,y,z,p,seg) => add(new THREE.Mesh(new THREE.ConeGeometry(r,h,seg||8), m), x,y,z,p);
+
+  /* --- soft contact shadows (fake AO) so objects feel grounded --- */
+  const AO_TEX = (function(){
+    const c = document.createElement('canvas'); c.width = c.height = 128;
+    const ctx = c.getContext('2d');
+    const g = ctx.createRadialGradient(64,64,0,64,64,64);
+    g.addColorStop(0,'rgba(16,18,12,.55)'); g.addColorStop(1,'rgba(16,18,12,0)');
+    ctx.fillStyle = g; ctx.fillRect(0,0,128,128);
+    return new THREE.CanvasTexture(c);
+  })();
+  function groundAO(x,z,rx,rz,parent,opacity){
+    const m = new THREE.Mesh(new THREE.PlaneGeometry(rx*2,rz*2),
+      new THREE.MeshBasicMaterial({map:AO_TEX, transparent:true, opacity:opacity===undefined?1:opacity, depthWrite:false}));
+    m.rotation.x = -Math.PI/2; m.position.set(x,0.03,z);
+    (parent||scene).add(m);
+    return m;
+  }
+
+  /* --- ground, fields, hills --- */
+  const ground = new THREE.Mesh(new THREE.PlaneGeometry(260,170), M.grass);
+  ground.rotation.x = -Math.PI/2; ground.receiveShadow = true; scene.add(ground);
+  function fieldPatch(x,z,w,d){
+    const f = new THREE.Mesh(new THREE.PlaneGeometry(w,d), M.field);
+    f.rotation.x = -Math.PI/2; f.position.set(x,.04,z); f.receiveShadow = true; scene.add(f);
+  }
+  fieldPatch(-30, 8, 26, 14);
+  fieldPatch(30, -24, 30, 14);
+  for(let i=0;i<6;i++) box(24,.18,.5, M.green, -30, .13, 3.2+i*1.6);
+  [[-55,-45,26],[10,-58,34],[55,-42,22]].forEach(c=>{
+    const h = new THREE.Mesh(new THREE.SphereGeometry(c[2],20,14), M.grass);
+    h.position.set(c[0], -c[2]*.68, c[1]); h.receiveShadow = true; scene.add(h);
+  });
+
+  /* --- road --- */
+  const roadCurve = new THREE.CatmullRomCurve3([
+    new THREE.Vector3(-65,0,30), new THREE.Vector3(-28,0,20),
+    new THREE.Vector3(0,0,11), new THREE.Vector3(20,0,4),
+    new THREE.Vector3(42,0,-6), new THREE.Vector3(65,0,-12)
+  ]);
+  const road = new THREE.Mesh(new THREE.TubeGeometry(roadCurve, 80, 1.8, 8, false), M.dirt);
+  road.scale.y = .03; road.position.y = .09; road.receiveShadow = true; scene.add(road);
+
+  /* --- barn + silo --- */
+  const barnG = new THREE.Group(); scene.add(barnG); barnG.position.set(-24,0,-10);
+  box(11,6,8, M.barn, 0,3,0, barnG);
+  const roof = cone(8,3.6, M.roof, 0,7.8,0, barnG, 4);
+  roof.rotation.y = Math.PI/4; roof.scale.z = .78;
+  box(3,3.4,.3, M.dark, 0,1.7,4.05, barnG);
+  cyl(2.4,10, M.steel, 8.5,5,-2, barnG, 14);
+  add(new THREE.Mesh(new THREE.SphereGeometry(2.4,14,8), M.steel), 8.5,10,-2, barnG).scale.y = .55;
+  groundAO(2,-1,8.5,6,barnG,.85);
+
+  /* --- windmill + water tank --- */
+  const waterG = new THREE.Group(); scene.add(waterG); waterG.position.set(-2,0,-18);
+  cyl(.35,11, M.dark, 0,5.5,0, waterG, 8);
+  const blades = new THREE.Group(); blades.position.set(0,11,.6); waterG.add(blades);
+  const BLADE_N = 6;
+  for(let i=0;i<BLADE_N;i++){
+    const b = box(.4,4.2,.1, M.steel, 0,2.05,0, blades);
+    b.position.applyAxisAngle(new THREE.Vector3(0,0,1), i*(Math.PI*2/BLADE_N));
+    b.rotation.z = i*(Math.PI*2/BLADE_N);
+  }
+  add(new THREE.Mesh(new THREE.SphereGeometry(.5,10,8), M.dark), 0,11,.6, waterG);
+  box(1.4,1,.08, M.dark, 0,11,-1.3, waterG);
+  cyl(2.2,3, M.tank, 5,1.5,1, waterG, 14);
+  add(new THREE.Mesh(new THREE.CylinderGeometry(2,2,.3,14), M.water), 5,3.1,1, waterG);
+  groundAO(0,0,3,3,waterG,.7);
+  groundAO(5,1,3.2,3.2,waterG,.7);
+
+  /* --- corral + cattle --- */
+  const corralG = new THREE.Group(); scene.add(corralG); corralG.position.set(18,0,4);
+  const cw = 14, cd = 9;
+  for(let x=-cw/2; x<=cw/2; x+=3.5){ box(.4,2.2,.4,M.wood,x,1.1,-cd/2,corralG); box(.4,2.2,.4,M.wood,x,1.1,cd/2,corralG); }
+  for(let z=-cd/2; z<=cd/2; z+=3){ box(.4,2.2,.4,M.wood,-cw/2,1.1,z,corralG); box(.4,2.2,.4,M.wood,cw/2,1.1,z,corralG); }
+  [.7,1.6].forEach(y=>{
+    box(cw,.22,.22,M.wood,0,y,-cd/2,corralG); box(cw,.22,.22,M.wood,0,y,cd/2,corralG);
+    box(.22,.22,cd,M.wood,-cw/2,y,0,corralG); box(.22,.22,cd,M.wood,cw/2,y,0,corralG);
+  });
+  const cows = [];
+  function cow(x,z,m,ry){
+    const g = new THREE.Group(); corralG.add(g); g.position.set(x,0,z); g.rotation.y = ry;
+    groundAO(0,0,1.9,1.1,g,.55);
+    box(2.6,1.5,1.3, m, 0,1.5,0, g);
+    box(.9,.9,.8, m, 1.7,1.9,0, g);
+    box(.28,.9,.28, M.dark, .9,.45,.4, g); box(.28,.9,.28, M.dark, .9,.45,-.4, g);
+    box(.28,.9,.28, M.dark, -.9,.45,.4, g); box(.28,.9,.28, M.dark, -.9,.45,-.4, g);
+    cows.push(g);
+  }
+  cow(-3,-1, M.cream, .5); cow(2,1.5, M.brown, -2.2); cow(4,-2, M.cream, 2.8);
+  groundAO(0,0,9,6.5,corralG,.55);
+
+  /* --- deer blind + pines --- */
+  const blindG = new THREE.Group(); scene.add(blindG); blindG.position.set(36,0,-18);
+  [[-1.4,-1.4],[1.4,-1.4],[-1.4,1.4],[1.4,1.4]].forEach(l=> box(.35,4.5,.35, M.wood, l[0],2.25,l[1], blindG));
+  box(4,3,4, M.pine, 0,6,0, blindG);
+  const bRoof = cone(3.2,1.6, M.dark, 0,8.3,0, blindG, 4); bRoof.rotation.y = Math.PI/4;
+  box(2.2,1,.2, M.dark, 0,6.2,2.05, blindG);
+  groundAO(0,0,2.4,2.4,blindG,.6);
+  function pine(x,z,s,p){
+    const g = new THREE.Group(); (p||scene).add(g); g.position.set(x,0,z); g.scale.setScalar(s);
+    groundAO(0,0,2.4,2.4,g,.5);
+    cyl(.4,1.6, M.trunk, 0,.8,0, g, 6);
+    cone(2.2,3.4, M.pine, 0,3.2,0, g, 7);
+    cone(1.7,2.8, M.pine, 0,5.2,0, g, 7);
+  }
+  pine(-5,3,1.1,blindG); pine(5,-2,1.3,blindG); pine(8,4,.9,blindG);
+  pine(-52,-18,1.5); pine(-46,-24,1.2); pine(52,8,1.3); pine(48,16,1);
+
+  /* --- shop + welding truck --- */
+  const truckG = new THREE.Group(); scene.add(truckG); truckG.position.set(-12,0,14);
+  box(9,4.5,7, M.steel, -3,2.25,-1, truckG);
+  const sRoof = cone(6.4,2.4, M.dark, -3,5.9,-1, truckG, 4);
+  sRoof.rotation.y = Math.PI/4; sRoof.scale.z = .8;
+  box(2.6,3,.3, M.dark, -3,1.5,2.55, truckG);
+  const tr = new THREE.Group(); truckG.add(tr); tr.position.set(5,0,2); tr.rotation.y = .5;
+  box(4.4,1.2,2, M.green, 0,1.3,0, tr);
+  box(1.7,1.5,1.9, M.green, 2.4,2,0, tr);
+  box(1.1,.9,1.6, M.barn, -1.2,2.3,0, tr);
+  [[-1.4,.9],[-1.4,-.9],[2.4,.9],[2.4,-.9]].forEach(w=>{
+    const wh = cyl(.55,.4, M.dark, w[0],.55,w[1], tr, 10); wh.rotation.x = Math.PI/2;
+  });
+  groundAO(-3,-1,5.5,4.2,truckG,.75);
+  groundAO(0,0,3,1.6,tr,.55);
+
+  /* --- pond --- */
+  const pondMat = M.water.clone();
+  pondMat.transparent = true; pondMat.opacity = .92;
+  const pond = add(new THREE.Mesh(new THREE.CylinderGeometry(4.5,4.5,.2,18), pondMat), 28,.08,14);
+  pond.castShadow = false;
+
+  /* --- tractor --- */
+  const tractor = new THREE.Group(); scene.add(tractor);
+  box(2.6,1.1,1.5, M.green, 0,1.15,0, tractor);
+  box(1.3,1.3,1.3, M.glass, -.5,2.2,0, tractor);
+  [[-1,.85,.85,.85],[-1,.85,-.85,.85],[1.1,.5,.75,.5],[1.1,.5,-.75,.5]].forEach(w=>{
+    const wh = cyl(w[3],.45, M.dark, w[0],w[1],w[2], tractor, 10); wh.rotation.x = Math.PI/2;
+  });
+  groundAO(0,0,2,1.3,tractor,.55);
+  function placeTractor(t){
+    const p = roadCurve.getPointAt(t), tan = roadCurve.getTangentAt(t);
+    tractor.position.set(p.x, .1, p.z);
+    tractor.rotation.y = Math.atan2(-tan.z, tan.x);
+  }
+  placeTractor(.45);
+
+  /* --- clouds --- */
+  const cloudM = new THREE.MeshStandardMaterial({color:0xFFFFFF, roughness:1, metalness:0});
+  const clouds = [];
+  [[-30,26,-30,1.4],[10,30,-38,1.8],[38,24,-26,1.2]].forEach(c=>{
+    const g = new THREE.Group(); scene.add(g); g.position.set(c[0],c[1],c[2]);
+    [[0,0,0,3],[2.6,.4,.4,2.1],[-2.6,.3,-.3,2]].forEach(s=>{
+      const m = new THREE.Mesh(new THREE.SphereGeometry(s[3],10,8), cloudM);
+      m.position.set(s[0],s[1],s[2]); m.scale.y = .55; g.add(m);
+    });
+    g.scale.setScalar(c[3]);
+    clouds.push({g, x0:c[0]});
+  });
+
+  /* --- POIs + 3D map pins --- */
+  const POI = {
+    barn:  {pos:new THREE.Vector3(-24,3,-10), cam:new THREE.Vector3(-13,13,7),  mY:12},
+    water: {pos:new THREE.Vector3(-2,4,-18),  cam:new THREE.Vector3(8,12,-1),   mY:15.5},
+    corral:{pos:new THREE.Vector3(18,1,4),    cam:new THREE.Vector3(27,10,18),  mY:7},
+    blind: {pos:new THREE.Vector3(36,4,-18),  cam:new THREE.Vector3(45,11,-3),  mY:12.5},
+    truck: {pos:new THREE.Vector3(-12,1.5,14),cam:new THREE.Vector3(-3,9,27),   mY:9.5},
+    road:  {pos:new THREE.Vector3(10,0,7.5),  cam:new THREE.Vector3(17,11,20),  mY:6}
+  };
+  const pickables = [], markers = {};
+  const baseCol = new THREE.Color(0xD9762F), activeCol = new THREE.Color(0x4C7A3A);
+  Object.keys(POI).forEach(key=>{
+    const p = POI[key];
+    const g = new THREE.Group(); scene.add(g);
+    g.position.set(p.pos.x, p.mY, p.pos.z);
+    /* slim glowing beacon pin, refined from the original balloon-pin for a cleaner, more modern marker */
+    const pinM = new THREE.MeshStandardMaterial({color:0xD9762F, emissive:0xD9762F, emissiveIntensity:.85, roughness:.35, metalness:.12});
+    const head = new THREE.Mesh(new THREE.SphereGeometry(.6,16,14), pinM); g.add(head);
+    const tip = new THREE.Mesh(new THREE.ConeGeometry(.36,1.05,14), pinM);
+    tip.position.y = -.86; tip.rotation.x = Math.PI; g.add(tip);
+    const glowSprite = new THREE.Mesh(new THREE.SphereGeometry(1.15,12,10),
+      new THREE.MeshBasicMaterial({color:0xD9762F, transparent:true, opacity:.22, depthWrite:false}));
+    g.add(glowSprite);
+    /* thin beacon beam connecting the pin down to the ground marker */
+    const beamH = Math.max(p.mY - .9, .4);
+    const beam = new THREE.Mesh(new THREE.CylinderGeometry(.035,.035,beamH,6,1,true),
+      new THREE.MeshBasicMaterial({color:0xD9762F, transparent:true, opacity:.3, depthWrite:false, side:THREE.DoubleSide}));
+    beam.position.set(0, -.9 - beamH/2, 0);
+    g.add(beam);
+    /* ground-level radar ping, independent of the pin's bob so it always pulses flat on the ground */
+    const ring = new THREE.Mesh(new THREE.RingGeometry(1.0,1.28,28),
+      new THREE.MeshBasicMaterial({color:0xD9762F, transparent:true, opacity:.65, side:THREE.DoubleSide, depthWrite:false}));
+    ring.rotation.x = -Math.PI/2; ring.position.set(p.pos.x, .06, p.pos.z);
+    scene.add(ring);
+    const dot = new THREE.Mesh(new THREE.CircleGeometry(.32,20),
+      new THREE.MeshBasicMaterial({color:0xD9762F, transparent:true, opacity:.85, depthWrite:false}));
+    dot.rotation.x = -Math.PI/2; dot.position.set(p.pos.x, .07, p.pos.z);
+    scene.add(dot);
+    const hit = new THREE.Mesh(new THREE.CylinderGeometry(1.6,1.6,p.mY+1.4,10),
+      new THREE.MeshBasicMaterial({visible:false}));
+    hit.position.set(p.pos.x, (p.mY+1.4)/2, p.pos.z);
+    hit.userData.spot = key; scene.add(hit);
+    pickables.push(hit);
+    markers[key] = {g, pinM, glowSprite, beam, ring, dot, baseY:p.mY};
+  });
+
+  /* --- camera rig (GSAP, per threejs stack guideline: scripted moves, not OrbitControls) --- */
+  function flyTo(pos, tgt){
+    const d = reduceMotion ? 0 : 1.1;
+    gsap.to(camera.position, {x:pos.x, y:pos.y, z:pos.z, duration:d, ease:'power3.inOut', overwrite:'auto'});
+    gsap.to(camTgt, {x:tgt.x, y:tgt.y, z:tgt.z, duration:d, ease:'power3.inOut', overwrite:'auto',
+      onUpdate:()=>camera.lookAt(camTgt), onComplete:()=>camera.lookAt(camTgt)});
+  }
+  function tintMarker(m, col){
+    m.pinM.color.copy(col); m.pinM.emissive.copy(col);
+    m.glowSprite.material.color.copy(col);
+    m.beam.material.color.copy(col);
+    m.ring.material.color.copy(col);
+    m.dot.material.color.copy(col);
+  }
+  function select(key){
+    if(active === key){ deselect(); return; }
+    if(active) tintMarker(markers[active], baseCol);
+    active = key;
+    tintMarker(markers[key], activeCol);
+    chips.forEach(b=> b.setAttribute('aria-pressed', String(b.dataset.spot === key)));
+    flyTo(POI[key].cam, POI[key].pos);
+    resetBtn.classList.add('show');
+    gsap.timeline()
+      .to(card,{opacity:0,y:10,duration:.18,ease:'power1.in'})
+      .add(()=>{ cardTitle.textContent = SPOTS[key].t; cardText.textContent = SPOTS[key].d; })
+      .to(card,{opacity:1,y:0,duration:.45,ease:'power3.out'});
+  }
+  function deselect(){
+    if(active) tintMarker(markers[active], baseCol);
+    active = null;
+    chips.forEach(b=> b.setAttribute('aria-pressed','false'));
+    flyTo(HOME_POS, HOME_TGT);
+    resetBtn.classList.remove('show');
+    gsap.to(card,{opacity:0,y:14,duration:.3,ease:'power2.in'});
+  }
+  resetBtn.addEventListener('click', deselect);
+  chips.forEach(b=> b.addEventListener('click', ()=> select(b.dataset.spot)));
+
+  /* --- picking: pointer events cover mouse + touch (threejs stack guideline) --- */
+  const ray = new THREE.Raycaster(), ndc = new THREE.Vector2();
+  function pick(e){
+    const r = canvas.getBoundingClientRect();
+    ndc.x = ((e.clientX - r.left)/r.width)*2 - 1;
+    ndc.y = -((e.clientY - r.top)/r.height)*2 + 1;
+    ray.setFromCamera(ndc, camera);
+    const hits = ray.intersectObjects(pickables);
+    return hits.length ? hits[0].object.userData.spot : null;
+  }
+  canvas.addEventListener('pointerdown', e=>{ const k = pick(e); if(k) select(k); });
+  canvas.addEventListener('pointermove', e=>{ canvas.style.cursor = pick(e) ? 'pointer' : 'default'; });
+
+  /* --- resize: update aspect + projection (threejs stack guideline) --- */
+  function resize(){
+    const w = canvas.clientWidth, h = canvas.clientHeight;
+    if(!w || !h) return;
+    camera.aspect = w/h;
+    camera.updateProjectionMatrix();
+    renderer.setSize(w, h, false);
+    if(composer) composer.setSize(w, h);
+  }
+  window.addEventListener('resize', resize);
+  resize();
+
+  /* --- entrance: aerial approach on first scroll into view --- */
+  if(!reduceMotion){
+    camera.position.set(0, 62, 96);
+    camera.lookAt(camTgt);
+    ScrollTrigger.create({trigger:'#ranch-stage', start:'top 75%', once:true,
+      onEnter:()=> flyTo(HOME_POS, HOME_TGT)});
+  }
+
+  /* --- loop: paused offscreen, ambient stilled under reduced motion --- */
+  let visible = false;
+  new IntersectionObserver(en=>{ visible = en[0].isIntersecting; }, {threshold:.05}).observe(canvas);
+  const clock = new THREE.Clock();
+  let tT = .45;
+  function tick(){
+    requestAnimationFrame(tick);
+    if(!visible) return;
+    const dt = Math.min(clock.getDelta(), .05);
+    const t = clock.elapsedTime;
+    if(!reduceMotion){
+      blades.rotation.z += dt*2.2;
+      tT = (tT + dt*.008) % 1;
+      placeTractor(tT);
+      clouds.forEach((c,i)=>{ c.g.position.x = c.x0 + Math.sin(t*.06 + i*2)*8; });
+      cows.forEach((c,i)=>{ c.rotation.z = Math.sin(t*1.2 + i)*.03; });
+      pondMat.opacity = .84 + Math.sin(t*1.3)*.08;
+      Object.keys(markers).forEach((k,i)=>{
+        const m = markers[k];
+        m.g.position.y = m.baseY + Math.sin(t*2 + i)*.25;
+        m.glowSprite.scale.setScalar(1 + (Math.sin(t*3 + i)+1)*.1);
+        /* radar-ping: ground ring expands outward and fades, then loops */
+        const ping = ((t*.55 + i*.4) % 1);
+        m.ring.scale.setScalar(1 + ping*2.1);
+        m.ring.material.opacity = (1-ping) * (k===active ? .8 : .55);
+      });
+    }
+    if(composer) composer.render(); else renderer.render(scene, camera);
+  }
+  tick();
+})();
+
+/* ============ CTA title reveal ============ */
+if(!reduceMotion) gsap.to('#cta-title .line > span',{
+  y:0,duration:1.05,stagger:.12,ease:'power4.out',
+  scrollTrigger:{trigger:'#cta-title',start:'top 80%'}
+});
+
+/* ============ anchor scrolling ============ */
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{
+    const target = document.querySelector(a.getAttribute('href'));
+    if(!target) return;
+    e.preventDefault();
+    target.scrollIntoView({behavior: reduceMotion ? 'auto' : 'smooth'});
+  });
+});
 </script>
 </body>
 </html>
