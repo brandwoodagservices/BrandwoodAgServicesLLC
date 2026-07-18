@@ -77,9 +77,12 @@
   .loader-word span.wheat{color:var(--wheat);}
   .loader-sub{
     overflow:hidden;font-size:.75rem;letter-spacing:.45em;text-transform:uppercase;
-    color:rgba(244,240,230,.55);
+    color:rgba(244,240,230,.55);text-align:center;max-width:88vw;line-height:1.8;
   }
   .loader-sub span{display:inline-block;transform:translateY(110%);}
+  @media(max-width:480px){
+    .loader-sub{font-size:.62rem;letter-spacing:.22em;}
+  }
   .loader-track{
     width:min(420px,70vw);height:1px;background:rgba(244,240,230,.18);position:relative;
   }
@@ -114,9 +117,9 @@
   /* ---------- logo mark (masked PNG, tinted via currentColor) ---------- */
   .logo-mark{
     display:inline-block;flex:none;background-color:currentColor;
-    -webkit-mask-image:url('../images/BrandwoodAGLOGO.png');-webkit-mask-size:contain;
+    -webkit-mask-image:url('images/BrandwoodAGLOGO.png');-webkit-mask-size:contain;
     -webkit-mask-repeat:no-repeat;-webkit-mask-position:center;
-    mask-image:url('../images/BrandwoodAGLOGO.png');mask-size:contain;
+    mask-image:url('images/BrandwoodAGLOGO.png');mask-size:contain;
     mask-repeat:no-repeat;mask-position:center;
   }
   .loader-logo{width:70px;height:70px;color:var(--cream);}
