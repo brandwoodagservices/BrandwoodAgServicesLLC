@@ -290,6 +290,17 @@
     flex:0 0 100vw;height:100%;display:flex;flex-direction:column;justify-content:center;
     padding:6rem clamp(1.2rem,5vw,4.5rem) 3rem;position:relative;border-right:1px solid var(--line-lt);
   }
+  /* mobile: normal vertical scroll instead of the pinned horizontal track */
+  @media(max-width:760px){
+    .svc-track{display:block;height:auto;}
+    .svc-panel{
+      width:100%;height:auto;min-height:auto;flex:none;
+      border-right:none;border-bottom:1px solid var(--line-lt);
+      padding:6.5rem clamp(1.2rem,5vw,2.2rem) 3.5rem;
+    }
+    .svc-head{position:sticky;top:0;background:var(--ink);}
+    .svc-progress{display:none;}
+  }
   .svc-num{
     font-family:var(--font-d);font-size:clamp(5rem,16vw,11rem);line-height:1;
     color:transparent;-webkit-text-stroke:1px rgba(244,240,230,.25);
@@ -596,7 +607,7 @@
   <div class="sec-label">Who we are</div>
   <div class="intro-top">
     <figure class="founder reveal">
-      <img src="../images/FullSizeRender.jpeg" alt="Zach Griffin, founder of Brandwood Ag Services, standing beside a vintage truck on a ranch property">
+      <img src="images/ProfilePicture.jpeg" alt="Zach Griffin, founder of Brandwood Ag Services, standing beside a vintage truck on a ranch property">
       <figcaption><b>Zach Griffin</b>Founder, Brandwood Ag Services</figcaption>
     </figure>
     <p class="intro-copy" id="intro-copy">
@@ -702,9 +713,9 @@
           </ul>
         </div>
         <div class="svc-gallery">
-          <figure><img src="../images/Ranch&amp;Ag1.jpeg" alt="Mini excavator clearing ground on a Central Valley ranch property" loading="lazy"></figure>
-          <figure><img src="../images/Ranch&amp;Ag2.jpg" alt="Well-maintained orchard rows on an agricultural property" loading="lazy"></figure>
-          <figure><img src="../images/Ranch&amp;Ag3.jpg" alt="Tractor working a field during routine property maintenance" loading="lazy"></figure>
+          <figure><img src="images/Ranch&amp;Ag1.jpeg" alt="Mini excavator clearing ground on a Central Valley ranch property" loading="lazy"></figure>
+          <figure><img src="images/Ranch&amp;Ag2.jpg" alt="Well-maintained orchard rows on an agricultural property" loading="lazy"></figure>
+          <figure><img src="images/Ranch&amp;Ag3.jpg" alt="Tractor working a field during routine property maintenance" loading="lazy"></figure>
         </div>
       </div>
     </article>
@@ -724,10 +735,10 @@
         </div>
         <div class="svc-gallery">
           <figure>
-            <video class="svc-video" src="../videos/HuntVid.MOV" poster="../images/Hunt1.jpeg" muted loop playsinline autoplay preload="metadata" aria-label="Video tour of a hunting property access road and fence line"></video>
+            <video class="svc-video" src="videos/HuntVid.MOV" poster="images/Hunt1.jpeg" muted loop playsinline autoplay preload="metadata" aria-label="Video tour of a hunting property access road and fence line"></video>
           </figure>
-          <figure><img src="../images/Hunt1.jpeg" alt="Fence line along a hunting property access road bordered by orchard trees" loading="lazy"></figure>
-          <figure><img src="../images/Hunt2.jpeg" alt="Graded access road and fence line on a hunting property" loading="lazy"></figure>
+          <figure><img src="images/Hunt1.jpeg" alt="Fence line along a hunting property access road bordered by orchard trees" loading="lazy"></figure>
+          <figure><img src="images/Hunt2.jpeg" alt="Graded access road and fence line on a hunting property" loading="lazy"></figure>
         </div>
       </div>
     </article>
@@ -746,9 +757,9 @@
           </ul>
         </div>
         <div class="svc-gallery">
-          <figure><img src="../images/Fencing3.jpeg" alt="Setting a fence post from the truck bed during a livestock fencing job" loading="lazy"></figure>
-          <figure><img src="../images/Fencing1.JPEG" alt="Heavy-duty livestock corral panel fabricated for a ranch property" loading="lazy"></figure>
-          <figure><img src="../images/Fencing2.JPEG" alt="Stack of custom livestock corral panels ready for installation" loading="lazy"></figure>
+          <figure><img src="images/Fencing3.jpeg" alt="Setting a fence post from the truck bed during a livestock fencing job" loading="lazy"></figure>
+          <figure><img src="images/Fencing1.JPEG" alt="Heavy-duty livestock corral panel fabricated for a ranch property" loading="lazy"></figure>
+          <figure><img src="images/Fencing2.JPEG" alt="Stack of custom livestock corral panels ready for installation" loading="lazy"></figure>
         </div>
       </div>
     </article>
@@ -768,9 +779,9 @@
           </ul>
         </div>
         <div class="svc-gallery">
-          <figure><img src="../images/Welding2.JPEG" alt="Fanned stack of raw steel pipe stock for fabrication work" loading="lazy"></figure>
-          <figure><img src="../images/Welding1.JPEG" alt="Steel pipe stock staged on a trailer for a welding and fabrication job" loading="lazy"></figure>
-          <figure><img src="../images/Welding3.JPEG" alt="Steel pipe stock organized on-site ahead of fabrication" loading="lazy"></figure>
+          <figure><img src="images/Welding2.JPEG" alt="Fanned stack of raw steel pipe stock for fabrication work" loading="lazy"></figure>
+          <figure><img src="images/Welding1.JPEG" alt="Steel pipe stock staged on a trailer for a welding and fabrication job" loading="lazy"></figure>
+          <figure><img src="images/Welding3.JPEG" alt="Steel pipe stock organized on-site ahead of fabrication" loading="lazy"></figure>
         </div>
       </div>
     </article>
@@ -1037,34 +1048,50 @@ if(!reduceMotion){
   .to(fenceBraces,{strokeDashoffset:0,stagger:.05,ease:'power1.inOut'},'<0.2');
 }
 
-/* ============ services: pinned horizontal scroll ============ */
+/* ============ services: pinned horizontal on desktop, normal vertical scroll on mobile ============ */
 (function(){
-  if(reduceMotion) return; // panels stack vertically via .no-motion CSS
+  if(reduceMotion) return; // panels stack vertically via .no-motion CSS, no animation either way
   const track = document.getElementById('svc-track');
   const panels = gsap.utils.toArray('.svc-panel');
   const current = document.getElementById('svc-current');
-  const getDist = () => track.scrollWidth - window.innerWidth;
 
-  const tween = gsap.to(track,{
-    x:()=>-getDist(),ease:'none',
-    scrollTrigger:{
-      trigger:'.services',start:'top top',
-      end:()=>'+='+getDist(),
-      pin:true,scrub:1,invalidateOnRefresh:true,
-      onUpdate(self){
-        gsap.set('#svc-bar',{scaleX:self.progress});
-        const idx = Math.min(panels.length-1, Math.floor(self.progress*panels.length));
-        current.textContent = String(idx+1).padStart(2,'0');
-      }
+  ScrollTrigger.matchMedia({
+    // desktop/tablet: pin the section and scrub panels across horizontally
+    '(min-width: 761px)': function(){
+      const getDist = () => track.scrollWidth - window.innerWidth;
+      const tween = gsap.to(track,{
+        x:()=>-getDist(),ease:'none',
+        scrollTrigger:{
+          trigger:'.services',start:'top top',
+          end:()=>'+='+getDist(),
+          pin:true,scrub:1,invalidateOnRefresh:true,
+          onUpdate(self){
+            gsap.set('#svc-bar',{scaleX:self.progress});
+            const idx = Math.min(panels.length-1, Math.floor(self.progress*panels.length));
+            current.textContent = String(idx+1).padStart(2,'0');
+          }
+        }
+      });
+      panels.forEach(panel=>{
+        gsap.from(panel.querySelectorAll('h3, .svc-list li, .svc-gallery figure'),{
+          y:40,opacity:0,stagger:.05,duration:.7,ease:'power3.out',
+          scrollTrigger:{trigger:panel,containerAnimation:tween,start:'left 70%'}
+        });
+      });
+    },
+    // mobile: panels stack and scroll normally; content fades in as each one arrives
+    '(max-width: 760px)': function(){
+      panels.forEach((panel,i)=>{
+        gsap.from(panel.querySelectorAll('h3, .svc-list li, .svc-gallery figure'),{
+          y:28,opacity:0,stagger:.04,duration:.6,ease:'power3.out',
+          scrollTrigger:{trigger:panel,start:'top 78%'}
+        });
+        ScrollTrigger.create({
+          trigger:panel,start:'top center',end:'bottom center',
+          onToggle:self=>{ if(self.isActive) current.textContent = String(i+1).padStart(2,'0'); }
+        });
+      });
     }
-  });
-
-  // per-panel content slides in as it enters view
-  panels.forEach(panel=>{
-    gsap.from(panel.querySelectorAll('h3, .svc-list li, .svc-gallery figure'),{
-      y:40,opacity:0,stagger:.05,duration:.7,ease:'power3.out',
-      scrollTrigger:{trigger:panel,containerAnimation:tween,start:'left 70%'}
-    });
   });
 })();
 
