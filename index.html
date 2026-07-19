@@ -424,9 +424,30 @@
   .big-btn{
     display:inline-flex;align-items:center;gap:1rem;background:var(--rust);color:var(--cream);
     font-family:var(--font-d);font-size:1.5rem;letter-spacing:.08em;text-transform:uppercase;
-    padding:1.1rem 2.2rem;border-radius:999px;transition:background .3s ease,color .3s ease,transform .3s ease;
+    padding:1.1rem 2.2rem;border-radius:999px;border:none;cursor:pointer;
+    transition:background .3s ease,color .3s ease,transform .3s ease;
   }
   .big-btn:hover{background:var(--wheat);color:var(--ink);transform:translateY(-3px);}
+
+  /* ---------- contact form (Formspree) ---------- */
+  .contact-form{margin-top:2.5rem;max-width:640px;}
+  .cf-row{display:grid;grid-template-columns:1fr 1fr;gap:0 2rem;}
+  .cf-field{margin-bottom:1.6rem;display:flex;flex-direction:column;gap:.5rem;}
+  .cf-field label{
+    font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;
+    color:rgba(244,240,230,.6);font-weight:600;
+  }
+  .cf-field input,.cf-field select,.cf-field textarea{
+    background:transparent;border:none;border-bottom:1px solid var(--line-lt);
+    color:var(--cream);font-family:var(--font-b);font-size:1rem;padding:.6rem 0;
+    transition:border-color .25s ease;
+  }
+  .cf-field select{cursor:pointer;}
+  .cf-field select option{background:var(--ink);color:var(--cream);}
+  .cf-field textarea{resize:vertical;min-height:90px;}
+  .cf-field input:focus,.cf-field select:focus,.cf-field textarea:focus{outline:none;border-color:var(--wheat);}
+  .cf-field input::placeholder,.cf-field textarea::placeholder{color:rgba(244,240,230,.35);}
+  @media(max-width:640px){.cf-row{grid-template-columns:1fr;}}
   footer{
     margin-top:5rem;display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem;
     font-size:.75rem;color:rgba(244,240,230,.6);letter-spacing:.08em;
