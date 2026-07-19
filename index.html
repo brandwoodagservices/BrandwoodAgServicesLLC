@@ -802,9 +802,44 @@
     <span class="line"><span>Let's put in</span></span>
     <span class="line"><span>the <em>work.</em></span></span>
   </h2>
-  <a class="big-btn" href="mailto:pennocksystems@gmail.com">Request an estimate
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14m0 0l-6-6m6 6l-6 6"/></svg>
-  </a>
+  <form action="https://formspree.io/f/xovlnqap" method="POST" class="contact-form">
+    <input type="hidden" name="_subject" value="New Estimate Request — Brandwood Ag Services">
+    <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
+    <div class="cf-row">
+      <div class="cf-field">
+        <label for="cf-name">Name</label>
+        <input id="cf-name" type="text" name="name" autocomplete="name" required>
+      </div>
+      <div class="cf-field">
+        <label for="cf-email">Email</label>
+        <input id="cf-email" type="email" name="email" autocomplete="email" required>
+      </div>
+    </div>
+    <div class="cf-row">
+      <div class="cf-field">
+        <label for="cf-phone">Phone</label>
+        <input id="cf-phone" type="tel" name="phone" autocomplete="tel">
+      </div>
+      <div class="cf-field">
+        <label for="cf-service">What do you need?</label>
+        <select id="cf-service" name="service">
+          <option value="">Select a service</option>
+          <option>Ranch &amp; Ag Property Management</option>
+          <option>Hunting Ranch Management</option>
+          <option>Livestock Fencing &amp; Structures</option>
+          <option>Welding &amp; Fabrication</option>
+          <option>Other</option>
+        </select>
+      </div>
+    </div>
+    <div class="cf-field">
+      <label for="cf-message">Tell us about the project</label>
+      <textarea id="cf-message" name="message" rows="4" placeholder="Property location, timeline, what you're looking to get done…" required></textarea>
+    </div>
+    <button type="submit" class="big-btn">Request an estimate
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14m0 0l-6-6m6 6l-6 6"/></svg>
+    </button>
+  </form>
   <div class="cta-row" style="margin-top:3.5rem;">
     <div class="col">
       <h5>Service Area</h5>
@@ -813,7 +848,7 @@
     <div class="col">
       <h5>Email</h5>
       <!-- TODO: replace with the business contact email -->
-      <a href="mailto:zgriffin@brandwoodagservices.com">zgriffin@brandwoodagservices.com</a>
+      <a href="mailto:pennocksystems@gmail.com">pennocksystems@gmail.com</a>
     </div>
     <div class="col">
       <h5>Phone</h5>
